@@ -26,7 +26,7 @@ I would also like to have a theme selection panel where you can choose from a se
   for the minesweeper game. This is not necessary and is just extra, if I have time.
 
 **NOTE**: this is not going to work very well as a console based application, and selecting which cell
-to interact with will be clunky.
+to interact with will be clunky. Same with selecting dimensions.
 
 _________
 
@@ -41,13 +41,11 @@ _________
 
 ## User Stories
 
-- as a user, I want to be able to choose how many cells are in my game by picking the dimensions of my game (This arbitrary, since even prime numbers can be chosen by selecting [prime x 1] as a dimension)
+- as a user, I want to be able to choose how many cells are in my game by picking the dimensions of my game 
+(This arbitrary, since even prime numbers can be chosen by selecting [prime x 1] as a dimension)
 - as a user, I want to click my first cell, clearing it and not dying immediately
-- as a user, I want to save my game so that if I quit the application, I can resume my game when I re-open the application
 - as a user, I want to see all the bomb tiles when I die (I think this counts as viewing a list of items?)
 - as a user, I want to see how many bombs there are left
 - as a user, I want to see how long I've spent on my current game
+- as a user, I want cleared cells to be color coded
 
-
-
-*NOTE: SO sorry, I thought this was due at midnight tonight. It was mostly done, I just needed to clear the specifics of how the first click will work*

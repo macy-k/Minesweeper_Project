@@ -246,16 +246,27 @@ class BoardTest {
     }
 
     @Test
-    public void testClearBombsInRadius() {
+    public void testGetFlaggedInRadius() {
         b.setHeight(5);
         b.setWidth(5);
         b.setRandomSeed(35);
         b.generateLayout();
         b.getCell(2, 1).toggleFlag();
         b.getCell(2, 3).toggleFlag();
-        b.clearInRadius(2, 2);
-        assertEquals(bombsListV8, b.getBombsList());
-        assertEquals(inRadiusListV8, b.getInRadiusList());
+        b.getCell(3, 2).toggleFlag();
+        assertEquals(3, b.getFlaggedInRadius(2,2));
+    }
+
+    @Test
+    public void testGetUnflaggedMultipe() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(2, 1).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(2, 3).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(3, 2).toggleFlag());
+        assertEquals(b.getBombs() - 3, b.getUnflaggedBombs());
     }
 
 }

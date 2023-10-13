@@ -54,7 +54,6 @@ public class Cell {
         inRadius--;
     }
 
-
     public boolean getIsBomb() {
         return isBomb;
     }

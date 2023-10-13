@@ -3,7 +3,6 @@ package ui;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -18,13 +17,13 @@ import java.io.IOException;
 public class Terminal {
     private static final int SCALE = 1;
 
-    private static Board board = null;
+    private Board board;
     private Screen screen;
-    private static Game game;
+    private Game game;
 
     // EFFECTS: Initiates Terminal with given Board
     public Terminal(Board board) {
-        Terminal.board = board;
+        this.board = board;
     }
 
     // EFFECTS: specifies terminal of size needed for given board and creates screen
@@ -188,7 +187,7 @@ public class Terminal {
         }
     }
 
-    public static void attemptClear(int row, int column) {
+    public void attemptClear(int row, int column) {
         if (!game.isStarted()) {
             game.start();
             board.replaceBombsInRadius(row, column);
@@ -202,13 +201,27 @@ public class Terminal {
             }
         }
     }
+
+    public void clearInRadius(int startRow, int startColumn) {
+        for (int row = startRow - 1; row <= startRow + 1; row++) {
+            if (row >= 0 & row < board.getHeight()) {
+                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
+                        if (!board.getCell(row, column).getIsFlagged()) {
+                            attemptClear(row, column);
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     private void determineSpaceAction() {
         Cell cell = board.getCell(game.getY(), game.getX());
         if (!cell.getIsClear()) {
             board.changeUnflaggedBombs(cell.toggleFlag());
         } else if (board.getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
-            board.clearInRadius(game.getY(), game.getX());
+            clearInRadius(game.getY(), game.getX());
         }
     }
 }

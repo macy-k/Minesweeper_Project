@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class MineSweeper {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -29,6 +28,10 @@ public class MineSweeper {
                 getNewDimensions();
             } else if (Objects.equals(command, "S")) {
                 System.out.println("Navigate to game window.");
+                System.out.println("Controls are: w, a, s, d to move cursor, c to clear a cell, and SPACE to either");
+                System.out.println("(1) When cursor is on an uncleared cell, flags it");
+                System.out.println("(2) When cursor is on a clear cell, if the amount of flags in it's radius matches "
+                        + "it's number, clears all other cells in radius.");
                 System.out.println("");
                 Terminal gameHandler = new Terminal(board);
                 gameHandler.start();

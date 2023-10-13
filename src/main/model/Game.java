@@ -11,6 +11,7 @@ public class Game {
     private long startTime;
     private int time;
 
+    // EFFECTS: Initiates game in top left corner with a non-active clock
     public Game(Board board) {
         ended = false;
         started = false;
@@ -21,6 +22,8 @@ public class Game {
         this.board = board;
     }
 
+    // MODIFIES: this
+    // EFFECTS: progresses clock if game is in play.
     public void tick() {
         if (started & !ended) {
             long elapsedTime = System.currentTimeMillis() - startTime;
@@ -28,10 +31,14 @@ public class Game {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: records start time for use in the tick() function
     public void startTimer() {
         startTime = System.currentTimeMillis();
     }
 
+    // EFFECTS: thakes an integer and formats it into a string used for keeping time in minesweeper. String never
+    // exceeds "999"
     public String getTimeString() {
         if (time < 10) {
             return "00" + Integer.toString(time);
@@ -76,13 +83,30 @@ public class Game {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts game
     public void start() {
         started = true;
         startTimer();
     }
 
+    // MODIFIES: this
+    // EFFECTS: ends game
     public void end() {
         ended = true;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the clock time (for testing purposes)
+    public void setTime(int set) {
+        time = set;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets position (for testing purposed)
+    public void setPosition(int row, int column) {
+        posX = column;
+        posY = row;
     }
 
     public boolean isEnded() {
@@ -92,6 +116,7 @@ public class Game {
     public boolean isStarted() {
         return started;
     }
+
     
     public int getX() {
         return posX;
@@ -99,5 +124,17 @@ public class Game {
     
     public int getY() {
         return posY;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public int getTime() {
+        return time;
     }
 }
