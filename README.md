@@ -25,6 +25,9 @@ The mode selection panel will be if I get really ambitious and make an auto-solv
 I would also like to have a theme selection panel where you can choose from a set of color themes
   for the minesweeper game. This is not necessary and is just extra, if I have time.
 
+**NOTE**: this is not going to work very well as a console based application, and selecting which cell
+to interact with will be clunky.
+
 _________
 
 People will use this whenever they want a fun, quick, simple game to distract themselves and/or pass time.
