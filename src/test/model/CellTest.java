@@ -90,6 +90,29 @@ public class CellTest {
         assertEquals(4, c1.getInRadius());
     }
 
+    @Test
+    public void testDecreaseInRadius() {
+        assertEquals(0, c1.getInRadius());
+        c1.increaseInRadius();
+        assertEquals(1, c1.getInRadius());
+        c1.decreaseInRadius();
+        assertEquals(0, c1.getInRadius());
+    }
+
+    @Test
+    public void testDecreaseInRadiusMultiple() {
+        assertEquals(0, c1.getInRadius());
+        c1.increaseInRadius();
+        c1.increaseInRadius();
+        c1.increaseInRadius();
+        c1.increaseInRadius();
+        assertEquals(4, c1.getInRadius());
+        c1.decreaseInRadius();
+        c1.decreaseInRadius();
+        c1.decreaseInRadius();
+        assertEquals(1, c1.getInRadius());
+    }
+
 
 
 }

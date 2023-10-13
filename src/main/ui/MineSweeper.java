@@ -1,3 +1,5 @@
+// Inspiration for the design of ui taken from SnakeGameDemo
+
 package ui;
 
 import model.Board;
@@ -36,7 +38,7 @@ public class MineSweeper {
         }
     }
 
-    // MODIFIES: board width and board height
+    // MODIFIES: board
     // EFFECTS: changes dimensions of board as specified by user
     public void getNewDimensions() throws IOException {
         System.out.print("Rows: ");

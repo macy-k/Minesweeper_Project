@@ -53,7 +53,7 @@ class BoardTest {
             Arrays.asList(0, 1, 0, 1, 0),
             Arrays.asList(0, 1, 1, 1, 0),
             Arrays.asList(0, 0, 0, 0, 0));
-    private static final List<List<Boolean>> bombsListV5 = Arrays.asList(
+    private static final List<List<Boolean>> bombsListV5 = Arrays.asList( //start of multiple bombs
             Arrays.asList(false, false, false, false, false),
             Arrays.asList(true, false, false, false, false),
             Arrays.asList(true, true, false, true, true),
@@ -65,6 +65,42 @@ class BoardTest {
             Arrays.asList(2, 2, 2, 1, 1),
             Arrays.asList(2, 2, 2, 2, 2),
             Arrays.asList(0, 0, 0, 0, 0));
+    private static final List<List<Boolean>> bombsListV6 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(true, true, false, true, true),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV6 = Arrays.asList(
+            Arrays.asList(1, 1, 0, 0, 0),
+            Arrays.asList(2, 3, 2, 2, 2),
+            Arrays.asList(3, 3, 2, 1, 1),
+            Arrays.asList(2, 3, 2, 2, 2),
+            Arrays.asList(1, 1, 0, 0, 0));
+    private static final List<List<Boolean>> bombsListV7 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(false, true, false, true, true),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV7 = Arrays.asList(
+            Arrays.asList(1, 1, 0, 0, 0),
+            Arrays.asList(1, 2, 2, 2, 2),
+            Arrays.asList(3, 2, 2, 1, 1),
+            Arrays.asList(1, 2, 2, 2, 2),
+            Arrays.asList(1, 1, 0, 0, 0));
+    private static final List<List<Boolean>> bombsListV8 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, true, true),
+            Arrays.asList(false, false, false, true, true),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, true, false));
+    private static final List<List<Integer>> inRadiusListV8 = Arrays.asList(
+            Arrays.asList(0, 0, 1, 2, 2),
+            Arrays.asList(0, 0, 2, 3, 3),
+            Arrays.asList(0, 0, 2, 3, 3),
+            Arrays.asList(0, 0, 2, 3, 3),
+            Arrays.asList(0, 0, 1, 0, 1));
 
 
     private Board b;
@@ -170,6 +206,56 @@ class BoardTest {
         assertEquals(5, b.getBombs());
         assertEquals(bombsListV5, b.getBombsList());
         assertEquals(inRadiusListV5, b.getInRadiusList());
+    }
+
+    @Test
+    public void testReplaceBombWithoutRemove() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.replaceBomb();
+//        System.out.println(b.getBombsList());
+//        System.out.println(b.getInRadiusList());
+        assertEquals(bombsListV6, b.getBombsList());
+        assertEquals(inRadiusListV6, b.getInRadiusList());
+    }
+
+    @Test
+    public void testReplaceBombWithRemove() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.getCell(2, 0).setBomb();
+        b.deIncrementSurroundingCells(2, 0);
+        b.replaceBomb();
+        assertEquals(bombsListV7, b.getBombsList());
+        assertEquals(inRadiusListV7, b.getInRadiusList());
+    }
+
+    @Test
+    public void testReplaceBombsInRadius() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.replaceBombsInRadius(2, 0);
+        assertEquals(bombsListV8, b.getBombsList());
+        assertEquals(inRadiusListV8, b.getInRadiusList());
+    }
+
+    @Test
+    public void testClearBombsInRadius() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.getCell(2, 1).toggleFlag();
+        b.getCell(2, 3).toggleFlag();
+        b.clearInRadius(2, 2);
+        assertEquals(bombsListV8, b.getBombsList());
+        assertEquals(inRadiusListV8, b.getInRadiusList());
     }
 
 }

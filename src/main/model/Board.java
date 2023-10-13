@@ -1,6 +1,8 @@
 package model;
 
 
+import ui.Terminal;
+
 import java.util.*;
 import java.util.Arrays;
 
@@ -129,6 +131,25 @@ public class Board {
         }
     }
 
+    // EFFECTS: replace all bomb cells in radius (including original cell)
+    public void replaceBombsInRadius(int startRow, int startColumn) {
+        while (getBombsInRadius(startRow, startColumn) > 0) {
+            for (int row = startRow - 1; row <= startRow + 1; row++) {
+                if (row >= 0 & row < height) {
+                    for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+                        if (column >= 0 & column < width) {
+                            if (getCell(row, column).getIsBomb()) {
+                                getCell(row, column).setBomb();
+                                deIncrementSurroundingCells(row, column);
+                                replaceBomb();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //####################################################################
     //Board Interactions
     //####################################################################
@@ -148,7 +169,7 @@ public class Board {
     }
 
     // MODIFIES: this
-    // EFFECTS: ensures the value of this.bombs for the boards' height and width
+    // EFFECTS: ensures the value of bombs is correct for the board's height and width
     public void correctBombs() {
         bombs = (int) (height * width * RATIO);
         unflaggedBombs = bombs;
@@ -164,6 +185,20 @@ public class Board {
     // EFFECTS: changes the value of unflaggedBombs
     public void changeUnflaggedBombs(int change) {
         unflaggedBombs = unflaggedBombs - change;
+    }
+
+    public void clearInRadius(int startRow, int startColumn) {
+        for (int row = startRow - 1; row <= startRow + 1; row++) {
+            if (row >= 0 & row < height) {
+                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+                    if (column >= 0 & column < width & !(row == startRow & column == startColumn)) {
+                        if (!getCell(row, column).getIsFlagged()) {
+                            Terminal.attemptClear(row, column);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //####################################################################
@@ -184,10 +219,6 @@ public class Board {
 
     public int getUnflaggedBombs() {
         return unflaggedBombs;
-    }
-
-    public List<List<Cell>> getLayout() {
-        return layout;
     }
 
     // EFFECTS: gets certain cell at via row and column number (index starts at 0)
@@ -229,24 +260,6 @@ public class Board {
         return countBombs;
     }
 
-    // EFFECTS: replace all bomb cells in radius (including original cell)
-    public void replaceBombsInRadius(int startRow, int startColumn) {
-        while (getBombsInRadius(startRow, startColumn) > 0) {
-            for (int row = startRow - 1; row <= startRow + 1; row++) {
-                if (row >= 0 & row < height) {
-                    for (int column = startColumn - 1; column <= startColumn + 1; column++) {
-                        if (column >= 0 & column < width) {
-                            if (getCell(row, column).getIsBomb()) {
-                                getCell(row, column).setBomb();
-                                deIncrementSurroundingCells(row, column);
-                                replaceBomb();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     // EFFECTS: gets board of each cell's isBomb field
     public List<List<Boolean>> getBombsList() {
@@ -261,19 +274,6 @@ public class Board {
         return bombsList;
     }
 
-    // EFFECTS: gets board of each cell's isClear field
-    public List<List<Boolean>> getClearList() {
-        List<List<Boolean>> clearList = new ArrayList<>();
-        for (List<Cell> row : layout) {
-            List<Boolean> clearListRow = new ArrayList<>();
-            for (Cell column : row) {
-                clearListRow.add(column.getIsClear());
-            }
-            clearList.add(clearListRow);
-        }
-        return clearList;
-    }
-
     // EFFECTS: gets board of each cell's inRadius field
     public List<List<Integer>> getInRadiusList() {
         List<List<Integer>> inRadiusList = new ArrayList<>();
@@ -285,6 +285,19 @@ public class Board {
             inRadiusList.add(inRadiusListRow);
         }
         return inRadiusList;
+    }
+
+    // EFFECTS: gets board of each cell's isClear field
+    public List<List<Boolean>> getClearList() {
+        List<List<Boolean>> clearList = new ArrayList<>();
+        for (List<Cell> row : layout) {
+            List<Boolean> clearListRow = new ArrayList<>();
+            for (Cell column : row) {
+                clearListRow.add(column.getIsClear());
+            }
+            clearList.add(clearListRow);
+        }
+        return clearList;
     }
 }
 

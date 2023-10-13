@@ -18,14 +18,13 @@ import java.io.IOException;
 public class Terminal {
     private static final int SCALE = 1;
 
-    private final Board board;
+    private static Board board = null;
     private Screen screen;
-    private Game game;
-//    private WindowBasedTextGUI endGui;
+    private static Game game;
 
     // EFFECTS: Initiates Terminal with given Board
     public Terminal(Board board) {
-        this.board = board;
+        Terminal.board = board;
     }
 
     // EFFECTS: specifies terminal of size needed for given board and creates screen
@@ -59,7 +58,7 @@ public class Terminal {
         screen.refresh();
     }
 
-    // MODIFIES: game x and game y
+    // MODIFIES: game
     // EFFECTS: Handles user keystrokes used to operate game. Responsible for clearing and movement commands
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
@@ -188,31 +187,8 @@ public class Terminal {
             return TextColor.ANSI.WHITE;
         }
     }
-    
-    private void determineSpaceAction() {
-        Cell cell = board.getCell(game.getY(), game.getX());
-        if (!cell.getIsClear()) {
-            board.changeUnflaggedBombs(cell.toggleFlag());
-        } else if (board.getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
-            clearInRadius(game.getY(), game.getX());
-        }
-    }
 
-    private void clearInRadius(int startRow, int startColumn) {
-        for (int row = startRow - 1; row <= startRow + 1; row++) {
-            if (row >= 0 & row < board.getHeight()) {
-                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
-                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
-                        if (!board.getCell(row, column).getIsFlagged()) {
-                            attemptClear(row, column);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void attemptClear(int row, int column) {
+    public static void attemptClear(int row, int column) {
         if (!game.isStarted()) {
             game.start();
             board.replaceBombsInRadius(row, column);
@@ -224,6 +200,15 @@ public class Terminal {
             } else {
                 cell.clear();
             }
+        }
+    }
+    
+    private void determineSpaceAction() {
+        Cell cell = board.getCell(game.getY(), game.getX());
+        if (!cell.getIsClear()) {
+            board.changeUnflaggedBombs(cell.toggleFlag());
+        } else if (board.getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
+            board.clearInRadius(game.getY(), game.getX());
         }
     }
 }

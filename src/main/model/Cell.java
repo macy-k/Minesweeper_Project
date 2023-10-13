@@ -23,7 +23,6 @@ public class Cell {
 
     // REQUIRES: will not be called on bomb cells
     // MODIFIES: this
-
     // EFFECTS: Changes cell state to clear. Only works if cell is unflagged.s
     public void clear() {
         if (!isFlagged) {
