@@ -3,6 +3,8 @@ package ui;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
+import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -16,6 +18,7 @@ import java.io.IOException;
 
 public class Terminal {
     private static final int SCALE = 1;
+    private WindowBasedTextGUI gui;
 
     private Board board;
     private Screen screen;
@@ -33,14 +36,15 @@ public class Terminal {
                 ((board.getHeight() * SCALE) + 2));
         screen = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize).createScreen();
         screen.startScreen();
+        gui = new MultiWindowTextGUI(screen);
 
         game = new Game(board);
 
         beginTicks();
     }
 
-    // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over or window has
-    // been exited.
+    // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over. Ends game
+    // if window has been exited.
     private void beginTicks() throws InterruptedException, IOException {
         while (!game.isEnded()) {
             tick();
@@ -48,6 +52,7 @@ public class Terminal {
         }
     }
 
+    // MODIFIES: this, game
     // EFFECTS: Handles one cycle of the game
     private void tick() throws IOException {
         handleUserInput();
@@ -82,7 +87,8 @@ public class Terminal {
         }
     }
 
-    //
+    // MODIFIES: this
+    // EFFECTS: renders the window according to game state and board data
     private void render() {
         if (game.isEnded()) {
             renderEndScreen();
@@ -93,12 +99,16 @@ public class Terminal {
         drawTimer();
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws timer in top right of screen
     private void drawTimer() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
         text.putString(screen.getTerminalSize().getColumns() - 4, 0, game.getTimeString());
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws unflagged-bomb count in upper left corner of screen
     private void drawUnflaggedBombs() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
@@ -106,6 +116,8 @@ public class Terminal {
         text.putString(8, 0, String.valueOf(board.getUnflaggedBombs()));
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws each individual board cell on screen, aka draws board
     private void drawBoard() {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
@@ -114,12 +126,17 @@ public class Terminal {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws screen required for when the game has ended
     private void renderEndScreen() {
         drawEndBoard();
         drawUnflaggedBombs();
         drawTimer();
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws each individual board cell on screen according to what is needed at the end of the game
+    // aka draws end-game board
     private void drawEndBoard() {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
@@ -128,6 +145,19 @@ public class Terminal {
         }
     }
 
+    // USED FOR DEBUGGING ONLY
+    // MODIFIES: this
+    // EFFECTS: draws board with bombs visible for debugging
+    private void drawDebugBoard() {
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int ii = 0; ii < board.getWidth(); ii++) {
+                drawDebugCells(ii, i);
+            }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: draws a cell based on its state
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
     private void drawCell(int column, int row) {
         Cell cell = board.getCell(row, column);
@@ -140,8 +170,25 @@ public class Terminal {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws a cell based on its state and what is needed to show during the end-game screen
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
     private void drawEndCells(int column, int row) {
+        Cell cell = board.getCell(row, column);
+        if (cell.getIsClear()) {
+            drawPosition(column, row, getPositionColor(column, row), Integer.toString(cell.getInRadius()));
+        } else if (cell.getIsBomb()) {
+            drawPosition(column, row, getPositionColor(column, row), '\u2600');
+        } else {
+            drawPosition(column, row, getPositionColor(column, row), '\u2588');
+        }
+    }
+
+    // USED FOR DEBUGGING ONLY
+    // MODIFIES: this
+    // EFFECTS: draws a cell based on its state and what is needed for debugging
+    @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
+    private void drawDebugCells(int column, int row) {
         Cell cell = board.getCell(row, column);
         if (cell.getIsBomb()) {
             drawPosition(column, row, getPositionColor(column, row), '\u2600');
@@ -150,12 +197,16 @@ public class Terminal {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws a given character of a given color at a given position (overloaded)
     private void drawPosition(int column, int row, TextColor color, char c) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
         text.putString(column,  row + 2, String.valueOf(c));
     }
 
+    // MODIFIES: this
+    // EFFECTS: draws a given string of a given color at a given position (overloaded)
     private void drawPosition(int column, int row, TextColor color, String c) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
@@ -187,27 +238,33 @@ public class Terminal {
         }
     }
 
+    // MODIFIES: game, cell
+    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
     public void attemptClear(int row, int column) {
+        Cell cell = board.getCell(row, column);
         if (!game.isStarted()) {
             game.start();
             board.replaceBombsInRadius(row, column);
-            board.getCell(row, column).clear();
+            cell.clear();
+            floodClear(row, column);
         } else {
-            Cell cell = board.getCell(row, column);
             if (cell.getIsBomb()) {
                 game.end();
             } else {
                 cell.clear();
+                floodClear(row, column);
             }
         }
     }
 
+    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
+    // radius is a 0, start flood clear.
     public void clearInRadius(int startRow, int startColumn) {
         for (int row = startRow - 1; row <= startRow + 1; row++) {
             if (row >= 0 & row < board.getHeight()) {
                 for (int column = startColumn - 1; column <= startColumn + 1; column++) {
                     if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
-                        if (!board.getCell(row, column).getIsFlagged()) {
+                        if (!board.getCell(row, column).getIsFlagged() & !board.getCell(row, column).getIsClear()) {
                             attemptClear(row, column);
                         }
                     }
@@ -215,7 +272,18 @@ public class Terminal {
             }
         }
     }
-    
+
+    // MODIFIES: this, cell
+    // EFFECTS: preforms clearInRadius if cell is has 0 in Radius
+    public void floodClear(int row, int column) {
+        if (board.getCell(row, column).getInRadius() == 0) {
+            clearInRadius(row, column);
+        }
+    }
+
+    // MODIFIES: board, cell
+    // EFFECTS: determines what action the space key should do based on cursor position, be it either toggling
+    // the flag of an uncleared cell or clearing the radius of cleared cell
     private void determineSpaceAction() {
         Cell cell = board.getCell(game.getY(), game.getX());
         if (!cell.getIsClear()) {

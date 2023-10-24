@@ -7,8 +7,8 @@ public class Board {
     private static final double RATIO = 0.2063;
     private static final Random rand = new Random();
 
-    private int height;
-    private int width;
+    private int height; // amount of rows
+    private int width; // amount of columns
     private int bombs;
     private List<List<Cell>> layout;
     
@@ -242,7 +242,6 @@ public class Board {
         }
         return countBombs;
     }
-
 
     // EFFECTS: gets arraylist of each cell's isBomb field
     public List<List<Boolean>> getBombsList() {

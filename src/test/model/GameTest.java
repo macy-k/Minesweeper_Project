@@ -83,7 +83,7 @@ class GameTest {
         g.moveDown();
         g.moveRight();
         assertEquals(b.getWidth() - 1, g.getX());
-        assertEquals(b.getHeight(), g.getY()); //
+        assertEquals(b.getHeight() - 1, g.getY()); //
     }
 
     @Test

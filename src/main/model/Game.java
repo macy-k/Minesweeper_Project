@@ -52,7 +52,7 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: moves the posX up by one
+    // EFFECTS: moves the posY up by one
     public void moveUp() {
         if (posY > 0) {
             posY--;
@@ -60,15 +60,15 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: moves the posX down by one
+    // EFFECTS: moves the posY down by one
     public void moveDown() {
-        if (posY < board.getWidth() - 1) {
+        if (posY < board.getHeight() - 1) {
             posY++;
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: moves the posY left by one
+    // EFFECTS: moves the posX left by one
     public void moveLeft() {
         if (posX > 0) {
             posX--;
@@ -78,7 +78,7 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: moves the posX right by one
     public void moveRight() {
-        if (posX < board.getHeight() - 1) {
+        if (posX < board.getWidth() - 1) {
             posX++;
         }
     }

@@ -20,8 +20,8 @@ public class MineSweeper {
         boolean playing = true;
 
         while (playing) {
-            System.out.println("Game Dimensions are currently " + Integer.toString(board.getWidth())
-                    + " x " + Integer.toString(board.getHeight()));
+            System.out.println("Game Dimensions are currently " + Integer.toString(board.getHeight()) + " rows by "
+                    + Integer.toString(board.getWidth()) + " columns.");
             System.out.println("Can either choose the game Dimensions (D), Start Game (S), or Exit (E). ");
             String command = reader.readLine();
             if (Objects.equals(command, "D")) {
