@@ -23,8 +23,13 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: progresses clock if game is in play.
+    // EFFECTS: progresses clock if game is in play. Also checks if game is won, and ends game if so.
     public void tick() {
+        if (board.getUnflaggedBombs() == 0) {
+            if (board.getCorrectlyFlaggedBombs() == board.getBombs()) {
+                end();
+            }
+        }
         if (started & !ended) {
             long elapsedTime = System.currentTimeMillis() - startTime;
             time = (int) elapsedTime / 1000;

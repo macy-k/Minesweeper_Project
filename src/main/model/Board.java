@@ -256,6 +256,19 @@ public class Board {
         return bombsList;
     }
 
+//    // EFFECTS: gets arraylist of each cell's isBomb field
+//    public List<List<Boolean>> getFlaggedList() {
+//        List<List<Boolean>> flaggedList = new ArrayList<>();
+//        for (List<Cell> row : layout) {
+//            List<Boolean> flaggedListRow = new ArrayList<>();
+//            for (Cell column : row) {
+//                flaggedListRow.add(column.getIsFlagged());
+//            }
+//            flaggedList.add(flaggedListRow);
+//        }
+//        return flaggedList;
+//    }
+
     // EFFECTS: gets arraylist of each cell's inRadius field
     public List<List<Integer>> getInRadiusList() {
         List<List<Integer>> inRadiusList = new ArrayList<>();
@@ -267,6 +280,19 @@ public class Board {
             inRadiusList.add(inRadiusListRow);
         }
         return inRadiusList;
+    }
+
+    // EFFECTS: gets number of correctly flagged bombs
+    public Integer getCorrectlyFlaggedBombs() {
+        Integer correctlyFlagged = 0;
+        for (List<Cell> row : layout) {
+            for (Cell cell : row) {
+                if (cell.getIsBomb() & cell.getIsFlagged()) {
+                    correctlyFlagged++;
+                }
+            }
+        }
+        return correctlyFlagged;
     }
 }
 

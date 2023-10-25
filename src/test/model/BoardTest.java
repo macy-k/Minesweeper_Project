@@ -269,4 +269,19 @@ class BoardTest {
         assertEquals(b.getBombs() - 3, b.getUnflaggedBombs());
     }
 
+    @Test
+    public void testGetCorrectlyFlaggedBombs() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(1, 0).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(2, 0).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(2, 1).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(3, 2).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(4, 4).toggleFlag());
+        assertEquals(b.getBombs() - 5, b.getUnflaggedBombs());
+        assertEquals(3, b.getCorrectlyFlaggedBombs());
+    }
+
 }

@@ -7,8 +7,10 @@ import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.terminal.Terminal;
 import model.Board;
 import model.Cell;
 import model.Game;
@@ -16,26 +18,37 @@ import model.Game;
 
 import java.io.IOException;
 
-public class Terminal {
-    private static final int SCALE = 1;
+public class Engine {
     private WindowBasedTextGUI gui;
+    private DefaultTerminalFactory factory;
+    private Terminal terminal;
+    private TerminalSize terminalSize;
+    private Screen screen;
 
     private Board board;
-    private Screen screen;
     private Game game;
 
-    // EFFECTS: Initiates Terminal with given Board
-    public Terminal(Board board) {
+    // EFFECTS: Initiates Engine with given Board
+    public Engine(Board board) {
         this.board = board;
     }
 
     // EFFECTS: specifies terminal of size needed for given board and creates screen
     public void start() throws IOException, InterruptedException {
-        TerminalSize terminalSize = new TerminalSize(
-                (board.getWidth() * SCALE),
-                ((board.getHeight() * SCALE) + 2));
-        screen = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize).createScreen();
+        Integer setTerminalWidth = board.getWidth();
+        if (setTerminalWidth < 14) {
+            setTerminalWidth = 14;
+        }
+        terminalSize = new TerminalSize(
+                (setTerminalWidth),
+                ((board.getHeight()) + 3));
+
+        factory = new DefaultTerminalFactory();
+        factory.setInitialTerminalSize(terminalSize);
+        terminal = factory.createTerminal();
+        screen = new TerminalScreen(terminal);
         screen.startScreen();
+
         gui = new MultiWindowTextGUI(screen);
 
         game = new Game(board);
@@ -89,7 +102,7 @@ public class Terminal {
 
     // MODIFIES: this
     // EFFECTS: renders the window according to game state and board data
-    private void render() {
+    private void render() throws IOException {
         if (game.isEnded()) {
             renderEndScreen();
             return;
@@ -104,21 +117,24 @@ public class Terminal {
     private void drawTimer() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
+        Integer tsize = screen.getTerminalSize().getColumns();
         text.putString(screen.getTerminalSize().getColumns() - 4, 0, game.getTimeString());
     }
 
     // MODIFIES: this
     // EFFECTS: draws unflagged-bomb count in upper left corner of screen
+    @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
     private void drawUnflaggedBombs() {
         TextGraphics text = screen.newTextGraphics();
+        text.setForegroundColor(TextColor.ANSI.BLACK);
+        text.putString(0,  0, String.valueOf('\u2588'));
         text.setForegroundColor(TextColor.ANSI.WHITE);
-        text.putString(1, 0, "Score: ");
-        text.putString(8, 0, String.valueOf(board.getUnflaggedBombs()));
+        text.putString(1, 0, String.valueOf(board.getUnflaggedBombs()));
     }
 
     // MODIFIES: this
     // EFFECTS: draws each individual board cell on screen, aka draws board
-    private void drawBoard() {
+    private void drawBoard() throws IOException {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
                 drawCell(ii, i);
@@ -129,29 +145,60 @@ public class Terminal {
     // MODIFIES: this
     // EFFECTS: draws screen required for when the game has ended
     private void renderEndScreen() {
-        drawEndBoard();
-        drawUnflaggedBombs();
+        drawEndPanel();
         drawTimer();
+        drawEndState();
     }
 
     // MODIFIES: this
-    // EFFECTS: draws each individual board cell on screen according to what is needed at the end of the game
-    // aka draws end-game board
-    private void drawEndBoard() {
+    // EFFECTS: draws end score (the number of bombs flagged) in upper left corner of screen
+    @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
+    private void drawEndPanel() {
+        TextGraphics text = screen.newTextGraphics();
+        text.setForegroundColor(TextColor.ANSI.BLACK);
+        text.putString(0,  0, String.valueOf('\u2588'));
+        text.setForegroundColor(TextColor.ANSI.WHITE);
+        text.putString(1, 0, "Score: ");
+        text.putString(8, 0, String.valueOf(board.getCorrectlyFlaggedBombs()));
+    }
+
+    // REQUIRES: game has ended
+    // MODIFIES: this
+    // EFFECTS: draws message at bottom of screen and needed end-board based on whether game is won/lost
+    private void drawEndState() {
+        TextGraphics text = screen.newTextGraphics();
+        text.setForegroundColor(TextColor.ANSI.WHITE);
+        if (board.getCorrectlyFlaggedBombs() == board.getBombs()) {
+            text.putString(screen.getTerminalSize().getColumns() / 2 - 4,
+                    screen.getTerminalSize().getRows() - 1,
+                    "You Win!");
+            drawWinBoard();
+        } else {
+            text.putString((screen.getTerminalSize().getColumns() / 2) - 4,
+                    screen.getTerminalSize().getRows() - 1,
+                    "You Lose");
+            drawLoseBoard();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: draws each individual board cell on screen according to what is needed at the end of a lost game
+    // aka draws losing end-game board
+    private void drawLoseBoard() {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
-                drawEndCells(ii, i);
+                drawLoseCell(ii, i);
             }
         }
     }
 
-    // USED FOR DEBUGGING ONLY
     // MODIFIES: this
-    // EFFECTS: draws board with bombs visible for debugging
-    private void drawDebugBoard() {
+    // EFFECTS: draws each individual board cell on screen according to what is needed at the end of a lost game
+    //    // aka draws losing end-game board
+    private void drawWinBoard() {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
-                drawDebugCells(ii, i);
+                drawWinCells(ii, i);
             }
         }
     }
@@ -159,7 +206,7 @@ public class Terminal {
     // MODIFIES: this
     // EFFECTS: draws a cell based on its state
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
-    private void drawCell(int column, int row) {
+    private void drawCell(int column, int row) throws IOException {
         Cell cell = board.getCell(row, column);
         if (cell.getIsClear()) {
             drawPosition(column, row, getPositionColor(column, row), Integer.toString(cell.getInRadius()));
@@ -171,9 +218,9 @@ public class Terminal {
     }
 
     // MODIFIES: this
-    // EFFECTS: draws a cell based on its state and what is needed to show during the end-game screen
+    // EFFECTS: draws a cell based on its state and what is needed to show during the lose end-game screen
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
-    private void drawEndCells(int column, int row) {
+    private void drawLoseCell(int column, int row) {
         Cell cell = board.getCell(row, column);
         if (cell.getIsClear()) {
             drawPosition(column, row, getPositionColor(column, row), Integer.toString(cell.getInRadius()));
@@ -184,14 +231,13 @@ public class Terminal {
         }
     }
 
-    // USED FOR DEBUGGING ONLY
     // MODIFIES: this
-    // EFFECTS: draws a cell based on its state and what is needed for debugging
+    // EFFECTS: draws a cell based on its state and what is needed to show during the win end-game screen
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
-    private void drawDebugCells(int column, int row) {
+    private void drawWinCells(int column, int row) {
         Cell cell = board.getCell(row, column);
         if (cell.getIsBomb()) {
-            drawPosition(column, row, getPositionColor(column, row), '\u2600');
+            drawPosition(column, row, getPositionColor(column, row), '\u2691');
         } else {
             drawPosition(column, row, getPositionColor(column, row), Integer.toString(cell.getInRadius()));
         }
