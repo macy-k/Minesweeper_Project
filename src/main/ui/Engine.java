@@ -14,6 +14,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import model.Board;
 import model.Cell;
 import model.Game;
+import model.Log;
 
 
 import java.io.IOException;
@@ -33,8 +34,9 @@ public class Engine {
         this.board = board;
     }
 
-    // EFFECTS: specifies terminal of size needed for given board and creates screen
-    public void start() throws IOException, InterruptedException {
+    // EFFECTS: specifies terminal of size needed for given board and creates screen. Once game is over returns
+    // a log of the game
+    public Log start() throws IOException, InterruptedException {
         Integer setTerminalWidth = board.getWidth();
         if (setTerminalWidth < 14) {
             setTerminalWidth = 14;
@@ -54,10 +56,10 @@ public class Engine {
         game = new Game(board);
 
         beginTicks();
+        return new Log(game.isIncomplete(), game.isWon(), board.getCorrectlyFlaggedBombs(), game.getTime());
     }
 
-    // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over. Ends game
-    // if window has been exited.
+    // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over.
     private void beginTicks() throws InterruptedException, IOException {
         while (!game.isEnded()) {
             tick();
@@ -96,6 +98,10 @@ public class Engine {
                 game.moveDown();
             } else if (stroke.getCharacter().equals('d')) {
                 game.moveRight();
+            } else if (stroke.getCharacter().equals('n')) {
+                //save
+            } else if (stroke.getCharacter().equals('m')) {
+                game.incomplete();
             }
         }
     }
@@ -173,6 +179,11 @@ public class Engine {
                     screen.getTerminalSize().getRows() - 1,
                     "You Win!");
             drawWinBoard();
+        } else if (game.isIncomplete()) {
+            text.putString((screen.getTerminalSize().getColumns() / 2) - 5,
+                    screen.getTerminalSize().getRows() - 1,
+                    "Incomplete");
+            drawLoseBoard();
         } else {
             text.putString((screen.getTerminalSize().getColumns() / 2) - 4,
                     screen.getTerminalSize().getRows() - 1,

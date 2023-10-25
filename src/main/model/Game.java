@@ -6,6 +6,8 @@ public class Game {
     private Board board;
     private boolean ended;
     private boolean started;
+    private boolean incomplete;
+    private boolean won;
     private int posX; // column
     private int posY; // row
     private long startTime;
@@ -15,6 +17,8 @@ public class Game {
     public Game(Board board) {
         ended = false;
         started = false;
+        incomplete = false;
+        won = false;
         posX = 0;
         posY = 0;
         startTime = 0;
@@ -26,8 +30,9 @@ public class Game {
     // EFFECTS: progresses clock if game is in play. Also checks if game is won, and ends game if so.
     public void tick() {
         if (board.getUnflaggedBombs() == 0) {
-            if (board.getCorrectlyFlaggedBombs() == board.getBombs()) {
+            if (board.getCorrectlyFlaggedBombs() == board.getBombs() & board.getAllUnflaggedCellsClear()) {
                 end();
+                won = true;
             }
         }
         if (started & !ended) {
@@ -102,6 +107,13 @@ public class Game {
     }
 
     // MODIFIES: this
+    // EFFECTS: ends game in incomplete state
+    public void incomplete() {
+        ended = true;
+        incomplete = true;
+    }
+
+    // MODIFIES: this
     // EFFECTS: sets the clock time (for testing purposes)
     public void setTime(int set) {
         time = set;
@@ -122,7 +134,14 @@ public class Game {
         return started;
     }
 
-    
+    public boolean isIncomplete() {
+        return incomplete;
+    }
+
+    public boolean isWon() {
+        return won;
+    }
+
     public int getX() {
         return posX;
     }

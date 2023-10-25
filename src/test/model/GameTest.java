@@ -68,9 +68,96 @@ class GameTest {
     }
 
     @Test
+    public void testWinTickFailNotCleared() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 0).toggleFlag());
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        g = new Game(b);
+        g.tick();
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testWinTickFailUnflagged() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.getCell(0, 1).clear();
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        g = new Game(b);
+        g.tick();
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testWinTickFailCorrectlyFlagged() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 1).toggleFlag());
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        g = new Game(b);
+        g.tick();
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testWinTickSuccess() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 0).toggleFlag());
+        b.getCell(0, 1).clear();
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        g = new Game(b);
+        g.tick();
+        assertTrue(g.isEnded());
+    }
+
+    @Test
     public void testEndGame() {
         g.end();
         assertTrue(g.isEnded());
+        assertFalse(g.isIncomplete());
+        assertFalse(g.isWon());
+    }
+
+    @Test
+    public void testIncompleteGame() {
+        g.incomplete();
+        assertTrue(g.isEnded());
+        assertTrue(g.isIncomplete());
+        assertFalse(g.isWon());
     }
 
     @Test

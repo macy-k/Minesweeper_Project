@@ -3,6 +3,8 @@
 package ui;
 
 import model.Board;
+import model.Game;
+import model.GameLogs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,20 +15,17 @@ public class MineSweeper {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     private Board board;
-    private Integer rows;
-    private Integer columns;
+    private Integer rows = 16;
+    private Integer columns = 30;
+    private GameLogs gameLogs;
 
     // EFFECTS: Asks questions required to start minesweeper game.
     public MineSweeper() throws IOException, InterruptedException {
         board = new Board();
-        rows = 16;
-        columns = 30;
-        boolean playing = true;
+        gameLogs = new GameLogs();
 
-        while (playing) {
-            System.out.println("Game Dimensions are currently " + Integer.toString(rows) + " rows by "
-                    + Integer.toString(columns) + " columns.");
-            System.out.println("Can either choose the game Dimensions (D), Start Game (S), or Exit (E). ");
+        while (true) {
+            gameCycleInstructions();
             String command = reader.readLine();
             if (Objects.equals(command, "D")) {
                 getNewDimensions();
@@ -34,9 +33,15 @@ public class MineSweeper {
                 gameInstructions();
                 resetBoard();
                 Engine gameHandler = new Engine(board);
-                gameHandler.start();
+                gameLogs.addLog(gameHandler.start());
+            } else if (Objects.equals(command, "L")) {
+                // Load saved board
+            } else if (Objects.equals(command, "V")) {
+                System.out.println(gameLogs.printGameLogs() + "\n");
             } else if (Objects.equals(command, "E")) {
-                playing = false;
+                return;
+            } else {
+                System.out.println("Not a valid command");
             }
         }
     }
@@ -68,11 +73,21 @@ public class MineSweeper {
     // EFFECTS: prints instruction for playing game.
     public void gameInstructions() {
         System.out.println("Navigate to game window.");
-        System.out.println("Controls are: w, a, s, d to move cursor, c to clear a cell, and SPACE to either");
+        System.out.println("Controls are: w, a, s, d to move cursor, c to clear a cell, n to save current board, "
+                + "m to exit current game, and SPACE to either");
         System.out.println("(1) When cursor is on an uncleared cell, flags it");
         System.out.println("(2) When cursor is on a clear cell, if the amount of flags in it's radius matches "
                 + "it's number, clears all other cells in radius.");
+        System.out.println("(if you have closed the game-panel and are stuck, press m)");
         System.out.println("");
+    }
+
+    // EFFECTS: prints game cycle instructions
+    public void gameCycleInstructions() {
+        System.out.println("Game Dimensions are currently " + rows + " rows by "
+                + columns + " columns.");
+        System.out.println("Can either choose the game Dimensions (D), Start Game (S), "
+                + "Load Game (L), View Game Logs (V), or Exit (E). ");
     }
 
     public static void main(String[] args) throws Exception  {

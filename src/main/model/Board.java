@@ -294,5 +294,18 @@ public class Board {
         }
         return correctlyFlagged;
     }
+
+    // EFFECTS: returns whether all unflagged cell are clear
+    public boolean getAllUnflaggedCellsClear() {
+        int unflaggedAndNotClear = 0;
+        for (List<Cell> row : layout) {
+            for (Cell cell : row) {
+                if (!cell.getIsClear() & !cell.getIsFlagged()) {
+                    unflaggedAndNotClear++;
+                }
+            }
+        }
+        return (unflaggedAndNotClear == 0);
+    }
 }
 

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
     private static final List<List<Boolean>> bombsListV1 = Arrays.asList(
@@ -282,6 +282,41 @@ class BoardTest {
         b.changeUnflaggedBombs(b.getCell(4, 4).toggleFlag());
         assertEquals(b.getBombs() - 5, b.getUnflaggedBombs());
         assertEquals(3, b.getCorrectlyFlaggedBombs());
+    }
+
+    @Test
+    public void testGetAllUnflaggedCellsClearTrue() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 0).toggleFlag());
+        b.getCell(0, 1).clear();
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        assertTrue(b.getAllUnflaggedCellsClear());
+    }
+
+    @Test
+    public void testGetAllUnflaggedCellsClearFalse() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 0).toggleFlag());
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        assertFalse(b.getAllUnflaggedCellsClear());
     }
 
 }
