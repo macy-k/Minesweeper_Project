@@ -117,6 +117,17 @@ class BoardTest {
         assertEquals(16, b.getHeight());
         assertEquals(30, b.getWidth());
         assertEquals(99, b.getBombs());
+        assertEquals(99, b.getUnflaggedBombs());
+    }
+
+    @Test
+    public void testParamaterizedInit() {
+        b = new Board(12, 15, 36, 30);
+        assertEquals(12, b.getHeight());
+        assertEquals(15, b.getWidth());
+        assertEquals(36, b.getBombs());
+        assertEquals(30, b.getUnflaggedBombs());
+        assertTrue(b.getLayout().isEmpty());
     }
 
     @Test
@@ -246,6 +257,21 @@ class BoardTest {
     }
 
     @Test
+    public void testAddRow() {
+        b = new Board(3, 3, 1, 1);
+        assertEquals(3, b.getHeight());
+        assertEquals(3, b.getWidth());
+        assertEquals(1, b.getBombs());
+        assertEquals(1, b.getUnflaggedBombs());
+        assertTrue(b.getLayout().isEmpty());
+        Cell c1 = new Cell(true, false, true, 0);
+        Cell c2 = new Cell(false, true, false, 1);
+        Cell c3 = new Cell(false, false, false, 0);
+        b.addRow(Arrays.asList(c1, c2, c3));
+        assertEquals(Arrays.asList(Arrays.asList(c1, c2,c3)), b.getLayout());
+    }
+
+    @Test
     public void testGetFlaggedInRadius() {
         b.setHeight(5);
         b.setWidth(5);
@@ -317,6 +343,82 @@ class BoardTest {
         b.getCell(2, 1).clear();
         b.getCell(2, 2).clear();
         assertFalse(b.getAllUnflaggedCellsClear());
+    }
+
+    @Test
+    public void testToJson() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(25);
+        b.generateLayout();
+        assertEquals("{\n" +
+                "    \"layout\": [\n" +
+                "        [\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        [\n" +
+                "            {\n" +
+                "                \"inRadius\": 1,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 1,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        [\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": true,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 1,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"inRadius\": 0,\n" +
+                "                \"isBomb\": false,\n" +
+                "                \"isClear\": false,\n" +
+                "                \"isFlagged\": false\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    ],\n" +
+                "    \"unflaggedBombs\": 1,\n" +
+                "    \"width\": 3,\n" +
+                "    \"bombs\": 1,\n" +
+                "    \"height\": 3\n" +
+                "}", b.toJson().toString(4));
     }
 
 }

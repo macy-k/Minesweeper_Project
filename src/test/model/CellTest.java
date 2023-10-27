@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,15 @@ public class CellTest {
         assertFalse(c1.getIsClear());
         assertFalse(c1.getIsFlagged());
         assertEquals(0, c1.getInRadius());
+    }
+
+    @Test
+    public void testParameterizedInit() {
+        c1 = new Cell(false, true, false, 5);
+        assertFalse(c1.getIsBomb());
+        assertTrue(c1.getIsClear());
+        assertFalse(c1.getIsFlagged());
+        assertEquals(5, c1.getInRadius());
     }
 
     @Test
@@ -113,6 +123,16 @@ public class CellTest {
         assertEquals(1, c1.getInRadius());
     }
 
+    @Test
+    public void toJson() {
+        JSONObject json = c1.toJson();
+        assertEquals("{\n" +
+                "    \"inRadius\": 0,\n" +
+                "    \"isBomb\": false,\n" +
+                "    \"isClear\": false,\n" +
+                "    \"isFlagged\": false\n" +
+                "}", json.toString(4));
+    }
 
 
 }

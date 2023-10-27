@@ -1,6 +1,9 @@
 package model;
 
-public class Game {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Game implements Writable {
     public static final int TICKS_PER_SECOND = 10;
 
     private Board board;
@@ -44,7 +47,7 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: records start time for use in the tick() function
     public void startTimer() {
-        startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis() - (time * 1000);
     }
 
     // EFFECTS: thakes an integer and formats it into a string used for keeping time in minesweeper. String never
@@ -114,7 +117,7 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets the clock time (for testing purposes)
+    // EFFECTS: sets the clock time
     public void setTime(int set) {
         time = set;
     }
@@ -160,5 +163,14 @@ public class Game {
 
     public int getTime() {
         return time;
+    }
+
+    // EFFECTS: converts a game into a json object and returns it
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("time", time);
+        json.put("board", board.toJson());
+        return json;
     }
 }

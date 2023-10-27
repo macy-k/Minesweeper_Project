@@ -37,4 +37,13 @@ public class LogTest {
         assertEquals("Won", l3.getStateString());
     }
 
+    @Test
+    public void testToJson() {
+        assertEquals("{\n" +
+                "    \"score\": 5,\n" +
+                "    \"incomplete\": true,\n" +
+                "    \"won\": false,\n" +
+                "    \"time\": 19\n" +
+                "}", l1.toJson().toString(4));
+    }
 }

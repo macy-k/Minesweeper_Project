@@ -1,0 +1,71 @@
+{
+  "time": 73,
+  "board": {
+    "layout": [
+      [
+        {
+          "inRadius": 0,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 0,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 0,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        }
+      ],
+      [
+        {
+          "inRadius": 1,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 1,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 0,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        }
+      ],
+      [
+        {
+          "inRadius": 0,
+          "isBomb": true,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 1,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        },
+        {
+          "inRadius": 0,
+          "isBomb": false,
+          "isClear": false,
+          "isFlagged": false
+        }
+      ]
+    ],
+    "unflaggedBombs": 1,
+    "width": 3,
+    "bombs": 1,
+    "height": 3
+  }
+}

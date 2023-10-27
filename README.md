@@ -41,6 +41,7 @@ _________
 
 ## User Stories
 
+Phase 1:
 - as a user, I want to be able to choose how many cells are in my game by picking the dimensions of my game 
 (This arbitrary, since even prime numbers can be chosen by selecting [prime x 1] as a dimension)
 - as a user, I want to click my first cell, clearing it and not dying immediately
@@ -48,4 +49,14 @@ _________
 - as a user, I want to see how many bombs there are left
 - as a user, I want to see how long I've spent on my current game
 - as a user, I want cleared cells to be color coded
+
+Phase 2:
+- as a user, I want to be able to save my current, incomplete game (game has to be started)
+- as a user, I want to be able to load in and play my saved game from the console menu. The timer should resume automatically
+- as a user, I want the game logs to automatically persist forever and continue to update with each game (autosave)
+EXTRA
+- as a user I want the board to automatically clear all 0 cells that are connected to clear cells.
+- as a user I want all my complete and incomplete games to be stored in a game log which I can view
+- as a user I want to see the number of games I've finished, the number of games I've won, and my win rate when I view my game logs.
+- as a user I want the game panel to show me my score and indicate whether a game is incomplete, won, or lost after the game is finished.
 

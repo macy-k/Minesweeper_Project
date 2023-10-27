@@ -1,6 +1,9 @@
 package model;
 
-public class Cell {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Cell implements Writable {
     private boolean isBomb;
     private boolean isClear;
     private boolean isFlagged;
@@ -15,6 +18,14 @@ public class Cell {
         inRadius = 0;
     }
 
+    // EFFECTS: creates a fully formed cell with specified fields
+    public Cell(boolean isBomb, boolean isClear, boolean isFlagged, int inRadius) {
+        this.isBomb = isBomb;
+        this.isClear = isClear;
+        this.isFlagged = isFlagged;
+        this.inRadius = inRadius;
+    }
+
     // MODIFIES: this
     // EFFECTS: makes cell a bomb of not a bomb based on its previous state
     public void setBomb() {
@@ -23,7 +34,7 @@ public class Cell {
 
     // REQUIRES: will not be called on bomb cells
     // MODIFIES: this
-    // EFFECTS: Changes cell state to clear. Only works if cell is unflagged.s
+    // EFFECTS: Changes cell state to clear. Only works if cell is unflagged.
     public void clear() {
         if (!isFlagged) {
             isClear = true;
@@ -68,5 +79,16 @@ public class Cell {
 
     public int getInRadius() {
         return inRadius;
+    }
+
+    // EFFECTS: converts a cell to a json object and returns it
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("isBomb", isBomb);
+        json.put("isClear", isClear);
+        json.put("isFlagged", isFlagged);
+        json.put("inRadius", inRadius);
+        return json;
     }
 }

@@ -1,6 +1,9 @@
 package model;
 
-public class Log {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Log implements Writable {
     private Boolean incomplete;
     private Boolean won;
     private Integer score;
@@ -40,5 +43,16 @@ public class Log {
 
     public String getStateString() {
         return stateString;
+    }
+
+    // EFFECTS: converts a Log into a json object and returns it
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("incomplete", incomplete);
+        json.put("won", won);
+        json.put("score", score);
+        json.put("time", time);
+        return json;
     }
 }

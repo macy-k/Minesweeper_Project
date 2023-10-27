@@ -15,11 +15,14 @@ import model.Board;
 import model.Cell;
 import model.Game;
 import model.Log;
+import persistence.JsonWriter;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Engine {
+    private static final String JSON_STORE_GAME = "./data/savedGame.json";
     private WindowBasedTextGUI gui;
     private DefaultTerminalFactory factory;
     private Terminal terminal;
@@ -28,10 +31,20 @@ public class Engine {
 
     private Board board;
     private Game game;
+    private JsonWriter jsonWriterGame;
 
     // EFFECTS: Initiates Engine with given Board
     public Engine(Board board) {
         this.board = board;
+        jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
+        game = new Game(board);
+    }
+
+    // EFFECTS: Initiates Engine with given Game
+    public Engine(Game game) {
+        this.board = game.getBoard();
+        jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
+        this.game = game;
     }
 
     // EFFECTS: specifies terminal of size needed for given board and creates screen. Once game is over returns
@@ -52,8 +65,6 @@ public class Engine {
         screen.startScreen();
 
         gui = new MultiWindowTextGUI(screen);
-
-        game = new Game(board);
 
         beginTicks();
         return new Log(game.isIncomplete(), game.isWon(), board.getCorrectlyFlaggedBombs(), game.getTime());
@@ -99,7 +110,7 @@ public class Engine {
             } else if (stroke.getCharacter().equals('d')) {
                 game.moveRight();
             } else if (stroke.getCharacter().equals('n')) {
-                //save
+                saveGame();
             } else if (stroke.getCharacter().equals('m')) {
                 game.incomplete();
             }
@@ -164,8 +175,8 @@ public class Engine {
         text.setForegroundColor(TextColor.ANSI.BLACK);
         text.putString(0,  0, String.valueOf('\u2588'));
         text.setForegroundColor(TextColor.ANSI.WHITE);
-        text.putString(1, 0, "Score: ");
-        text.putString(8, 0, String.valueOf(board.getCorrectlyFlaggedBombs()));
+        text.putString(1, 0, "Score:");
+        text.putString(7, 0, String.valueOf(board.getCorrectlyFlaggedBombs()));
     }
 
     // REQUIRES: game has ended
@@ -349,5 +360,22 @@ public class Engine {
             clearInRadius(game.getY(), game.getX());
         }
     }
+
+    // EFFECTS: saves the game to file if game is started
+    private void saveGame() {
+        if (!game.isStarted()) {
+            System.out.println("Cannot save un-started game");
+            return;
+        }
+        try {
+            jsonWriterGame.open();
+            jsonWriterGame.write(game);
+            jsonWriterGame.close();
+            System.out.println("Saved game to " + JSON_STORE_GAME + "\n");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE_GAME);
+        }
+    }
+
 }
 

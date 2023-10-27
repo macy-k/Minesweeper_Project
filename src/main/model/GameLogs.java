@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLogs {
+public class GameLogs implements Writable {
     private final List<Log> gameLogs;
     private Integer won;
     private Integer lost;
@@ -31,14 +35,14 @@ public class GameLogs {
     // EFFECTS: returns string of all game logs in human-readable form, ready for printing
     public String printGameLogs() {
         if (gameLogs.isEmpty()) {
-            return "No Logs";
+            return "No Logs\n";
         }
         StringBuilder sb = new StringBuilder();
+        sb.append("Games Finished:" + (getLost() + getWon()) + " -- Won:" + getWon()
+                +  " -- Win Rate:" + getWinRate() + "%\n\n");
         for (Log log : gameLogs) {
             sb.append("Score:" + log.getScore() + " -- Time:" + log.getTime() + " -- " + log.getStateString() + "\n");
         }
-        sb.append("Games Finished:" + (getLost() + getWon()) + " -- Won:" + getWon()
-                +  " -- Win Rate:" + getWinRate() + "%");
         return sb.toString();
     }
 
@@ -63,4 +67,21 @@ public class GameLogs {
         return lost;
     }
 
+    // EFFECTS: converts a GameLogs into a json object and returns it
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("gameLogs", logToJson());
+        return json;
+    }
+
+    // EFFECTS: converts an array of Logs into a json array and returns it
+    private JSONArray logToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Log l : gameLogs) {
+            jsonArray.put(l.toJson());
+        }
+        return jsonArray;
+    }
 }
