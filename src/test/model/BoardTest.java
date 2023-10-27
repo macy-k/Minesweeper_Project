@@ -129,6 +129,18 @@ class BoardTest {
             Arrays.asList(1, 1, 1, 0, 0),
             Arrays.asList(0, 0, 0, 0, 0),
             Arrays.asList(0, 0, 0, 0, 0));
+    private static final List<List<Boolean>> bombsListV11 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, true),
+            Arrays.asList(false, false, true, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV11 = Arrays.asList(
+            Arrays.asList(0, 0, 0, 1, 1),
+            Arrays.asList(0, 1, 1, 2, 0),
+            Arrays.asList(0, 1, 0, 2, 1),
+            Arrays.asList(0, 1, 1, 1, 0),
+            Arrays.asList(0, 0, 0, 0, 0));
 
 
     private Board b;
@@ -296,7 +308,7 @@ class BoardTest {
     }
 
     @Test
-    public void testReplaceBombsInRadiusInCorner() {
+    public void testReplaceBombsInRadiusInLeftCorner() {
         b.setHeight(5);
         b.setWidth(5);
         b.setRandomSeed(10);
@@ -304,6 +316,19 @@ class BoardTest {
         b.replaceBombsInRadius(4, 0);
         assertEquals(bombsListV10, b.getBombsList());
         assertEquals(inRadiusListV10, b.getInRadiusList());
+    }
+
+    @Test
+    public void testReplaceBombsInRadiusInRightCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(41);
+        b.generateLayout(1);
+        b.getCell(3, 3).setBomb();
+        b.incrementSurroundingCells(3,3);
+        b.replaceBombsInRadius(4, 4);
+        assertEquals(bombsListV11, b.getBombsList());
+        assertEquals(inRadiusListV11, b.getInRadiusList());
     }
 
 
@@ -345,7 +370,7 @@ class BoardTest {
     }
 
     @Test
-    public void testGetFlaggedInRadiusCorner() {
+    public void testGetFlaggedInRadiusLeftCorner() {
         b.setHeight(5);
         b.setWidth(5);
         b.setRandomSeed(10);
@@ -355,11 +380,32 @@ class BoardTest {
     }
 
     @Test
-    public void testGetBombsInRadiusCorner() {
+    public void testGetFlaggedInRadiusRightCorner() {
         b.setHeight(5);
         b.setWidth(5);
         b.setRandomSeed(10);
         b.generateLayout(1);
+        b.getCell(3, 4).toggleFlag();
+        assertEquals(1, b.getFlaggedInRadius(4, 4));
+    }
+
+    @Test
+    public void testGetBombsInRadiusLeftCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        assertEquals(1, b.getBombsInRadius(4, 0));
+    }
+
+    @Test
+    public void testGetBombsInRadiusRightCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        b.getCell(3, 3).setBomb();
+        b.incrementSurroundingCells(3,3);
         assertEquals(1, b.getBombsInRadius(4, 0));
     }
 
