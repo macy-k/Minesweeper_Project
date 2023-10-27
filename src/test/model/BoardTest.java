@@ -17,6 +17,10 @@ class BoardTest {
             Arrays.asList(0, 0, 0),
             Arrays.asList(1, 1, 0),
             Arrays.asList(0, 1, 0));
+    private static final List<List<Integer>> inRadiusListV1V2 = Arrays.asList(
+            Arrays.asList(0, 0, 0),
+            Arrays.asList(0, 0, 0),
+            Arrays.asList(0, 0, 0));
     private static final List<List<Boolean>> bombsListV2 = Arrays.asList(
             Arrays.asList(false, false, true, false, false),
             Arrays.asList(false, false, false, false, false),
@@ -101,6 +105,30 @@ class BoardTest {
             Arrays.asList(0, 0, 2, 3, 3),
             Arrays.asList(0, 0, 2, 3, 3),
             Arrays.asList(0, 0, 1, 0, 1));
+    private static final List<List<Boolean>> bombsListV9 = Arrays.asList(
+            Arrays.asList(true, false, true, true, true),
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(true, true, false, true, true),
+            Arrays.asList(false, true, true, true, false));
+    private static final List<List<Integer>> inRadiusListV9 = Arrays.asList(
+            Arrays.asList(2, 5, 4, 5, 3),
+            Arrays.asList(4, 7, 7, 8, 5),
+            Arrays.asList(5, 7, 7, 7, 5),
+            Arrays.asList(4, 6, 8, 6, 4),
+            Arrays.asList(3, 3, 4, 3, 3));
+    private static final List<List<Boolean>> bombsListV10 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, true, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV10 = Arrays.asList(
+            Arrays.asList(1, 1, 1, 0, 0),
+            Arrays.asList(1, 0, 1, 0, 0),
+            Arrays.asList(1, 1, 1, 0, 0),
+            Arrays.asList(0, 0, 0, 0, 0),
+            Arrays.asList(0, 0, 0, 0, 0));
 
 
     private Board b;
@@ -246,6 +274,17 @@ class BoardTest {
     }
 
     @Test
+    public void testReplaceBombOnBomb() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout(20);
+        b.replaceBomb();
+        assertEquals(bombsListV9, b.getBombsList());
+        assertEquals(inRadiusListV9, b.getInRadiusList());
+    }
+
+    @Test
     public void testReplaceBombsInRadius() {
         b.setHeight(5);
         b.setWidth(5);
@@ -254,6 +293,28 @@ class BoardTest {
         b.replaceBombsInRadius(2, 0);
         assertEquals(bombsListV8, b.getBombsList());
         assertEquals(inRadiusListV8, b.getInRadiusList());
+    }
+
+    @Test
+    public void testReplaceBombsInRadiusInCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        b.replaceBombsInRadius(4, 0);
+        assertEquals(bombsListV10, b.getBombsList());
+        assertEquals(inRadiusListV10, b.getInRadiusList());
+    }
+
+
+    @Test
+    public void testDeIncrementSurroundCellsCorner() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(25);
+        b.generateLayout();
+        b.deIncrementSurroundingCells(2, 0);
+        assertEquals(inRadiusListV1V2, b.getInRadiusList());
     }
 
     @Test
@@ -284,7 +345,26 @@ class BoardTest {
     }
 
     @Test
-    public void testGetUnflaggedMultipe() {
+    public void testGetFlaggedInRadiusCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        b.getCell(3, 0).toggleFlag();
+        assertEquals(1, b.getFlaggedInRadius(4, 0));
+    }
+
+    @Test
+    public void testGetBombsInRadiusCorner() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        assertEquals(1, b.getBombsInRadius(4, 0));
+    }
+
+    @Test
+    public void testGetUnflaggedMultiple() {
         b.setHeight(5);
         b.setWidth(5);
         b.setRandomSeed(35);
