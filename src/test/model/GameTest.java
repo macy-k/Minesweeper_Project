@@ -72,6 +72,12 @@ class GameTest {
             Arrays.asList(1, 1, 0, 0, 0),
             Arrays.asList(0, 1, 0, 0, 0),
             Arrays.asList(1, 1, 0, 0, 0));
+    private static final List<List<Boolean>> clearListV5 = Arrays.asList(
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(true, true, true, false, true),
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, true, true, true, true));
 
     @BeforeEach
     public void runBefore() {
@@ -307,11 +313,32 @@ class GameTest {
         assertTrue(g.isStarted());
         assertFalse(g.isEnded());
         g.attemptClear(3, 3);
+        assertEquals(bombsListV4, b.getBombsList());
+        assertEquals(clearListV4, b.getClearList());
+        assertEquals(inRadiusListV4, b.getInRadiusList());
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testAttemptClearStartedValidFloodWithFlag() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        b.getCell(1, 3).toggleFlag();
+        g = new Game(b);
+        assertFalse(g.isStarted());
+        assertFalse(g.isEnded());
+        g.start();
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+        g.attemptClear(3, 3);
 //        System.out.println(b.getBombsList());
 //        System.out.println(b.getInRadiusList());
 //        System.out.println(b.getClearList());
         assertEquals(bombsListV4, b.getBombsList());
-        assertEquals(clearListV4, b.getClearList());
+        assertEquals(clearListV5, b.getClearList());
         assertEquals(inRadiusListV4, b.getInRadiusList());
         assertTrue(g.isStarted());
         assertFalse(g.isEnded());
