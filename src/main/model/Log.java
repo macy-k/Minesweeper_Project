@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Holds the logged data for a single game
 public class Log implements Writable {
     private Boolean incomplete;
     private Boolean won;
@@ -44,6 +45,10 @@ public class Log implements Writable {
     public String getStateString() {
         return stateString;
     }
+
+//####################################################################
+//Json Setup
+//####################################################################
 
     // EFFECTS: converts a Log into a json object and returns it
     @Override

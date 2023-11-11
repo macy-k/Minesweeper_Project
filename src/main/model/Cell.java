@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// holds data needed for a single minesweeper cell and has cell modifier methods
 public class Cell implements Writable {
     private boolean isBomb;
     private boolean isClear;
@@ -54,16 +55,20 @@ public class Cell implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: increases amount of bombs in radius by one
-    public void increaseInRadius() {
-        inRadius++;
+    // EFFECTS: increases or decreases amount of bombs in radius by one
+    public void incrementInRadius(Boolean increase) {
+        if (increase) {
+            inRadius++;
+        } else {
+            inRadius--;
+        }
     }
 
-    // MODIFIES: this
-    // EFFECTS: decreases amount of bombs in radius by one
-    public void decreaseInRadius() {
-        inRadius--;
-    }
+//    // MODIFIES: this
+//    // EFFECTS: decreases amount of bombs in radius by one
+//    public void incrementInRadius(Boolean increase) {
+//        inRadius--;
+//    }
 
     public boolean getIsBomb() {
         return isBomb;
@@ -80,6 +85,10 @@ public class Cell implements Writable {
     public int getInRadius() {
         return inRadius;
     }
+
+//####################################################################
+//Json Setup
+//####################################################################
 
     // EFFECTS: converts a cell to a json object and returns it
     @Override

@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import static java.lang.System.exit;
 
+// Operates the Console Menu and facilitates the activation of a game
 public class MineSweeper {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final String JSON_STORE_GAME = "./data/savedGame.json";

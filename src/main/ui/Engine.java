@@ -21,6 +21,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Operates the game GUI, handles user inputs, and handles ticks
 public class Engine {
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
     private WindowBasedTextGUI gui;
@@ -100,7 +101,7 @@ public class Engine {
             if (stroke.getCharacter().equals(' ')) {
                 determineSpaceAction();
             } else if (stroke.getCharacter().equals('c')) {
-                attemptClear(game.getY(), game.getX());
+                game.attemptClear(game.getY(), game.getX());
             } else if (stroke.getCharacter().equals('w')) {
                 game.moveUp();
             } else if (stroke.getCharacter().equals('a')) {
@@ -265,21 +266,21 @@ public class Engine {
         }
     }
 
+    // REQUIRES: Object c is either a Character or String
     // MODIFIES: this
-    // EFFECTS: draws a given character of a given color at a given position (overloaded)
-    private void drawPosition(int column, int row, TextColor color, char c) {
+    // EFFECTS: draws a given character/string of a given color at a given position (overloaded)
+    private void drawPosition(int column, int row, TextColor color, Object c) {
+        String string;
+        if (c instanceof Character) {
+            string = String.valueOf(c);
+        } else {
+            string = (String) c;
+        }
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
-        text.putString(column,  row + 2, String.valueOf(c));
+        text.putString(column,  row + 2, string);
     }
 
-    // MODIFIES: this
-    // EFFECTS: draws a given string of a given color at a given position (overloaded)
-    private void drawPosition(int column, int row, TextColor color, String c) {
-        TextGraphics text = screen.newTextGraphics();
-        text.setForegroundColor(color);
-        text.putString(column,  row + 2, c);
-    }
 
     // EFFECTS chooses color for a tile based on: if it is the selected position, if it is a number which has a certain
     // color, and otherwise is white for uncleared cells
@@ -306,49 +307,6 @@ public class Engine {
         }
     }
 
-    // MODIFIES: game, cell
-    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
-    public void attemptClear(int row, int column) {
-        Cell cell = board.getCell(row, column);
-        if (!game.isStarted()) {
-            game.start();
-            board.replaceBombsInRadius(row, column);
-            cell.clear();
-            floodClear(row, column);
-        } else {
-            if (cell.getIsBomb()) {
-                game.end();
-            } else {
-                cell.clear();
-                floodClear(row, column);
-            }
-        }
-    }
-
-    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
-    // radius is a 0, start flood clear.
-    public void clearInRadius(int startRow, int startColumn) {
-        for (int row = startRow - 1; row <= startRow + 1; row++) {
-            if (row >= 0 & row < board.getHeight()) {
-                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
-                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
-                        if (!board.getCell(row, column).getIsFlagged() & !board.getCell(row, column).getIsClear()) {
-                            attemptClear(row, column);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // MODIFIES: this, cell
-    // EFFECTS: preforms clearInRadius if cell is has 0 in Radius
-    public void floodClear(int row, int column) {
-        if (board.getCell(row, column).getInRadius() == 0) {
-            clearInRadius(row, column);
-        }
-    }
-
     // MODIFIES: board, cell
     // EFFECTS: determines what action the space key should do based on cursor position, be it either toggling
     // the flag of an uncleared cell or clearing the radius of cleared cell
@@ -357,7 +315,7 @@ public class Engine {
         if (!cell.getIsClear()) {
             board.changeUnflaggedBombs(cell.toggleFlag());
         } else if (board.getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
-            clearInRadius(game.getY(), game.getX());
+            game.clearInRadius(game.getY(), game.getX());
         }
     }
 
@@ -377,5 +335,50 @@ public class Engine {
         }
     }
 
+// MOVED THESE METHODS TO A MORE RELEVANT CLASS. HOLDING RECORDS JUST IN CASE I HAVE TO MOVE THEM BACK
+
+
+//    // MODIFIES: game, cell
+//    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
+//    public void attemptClear(int row, int column) {
+//        Cell cell = board.getCell(row, column);
+//        if (!game.isStarted()) {
+//            game.start();
+//            board.replaceBombsInRadius(row, column);
+//            cell.clear();
+//            floodClear(row, column);
+//        } else {
+//            if (cell.getIsBomb()) {
+//                game.end();
+//            } else {
+//                cell.clear();
+//                floodClear(row, column);
+//            }
+//        }
+//    }
+//
+//    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
+//    // radius is a 0, start flood clear.
+//    public void clearInRadius(int startRow, int startColumn) {
+//        for (int row = startRow - 1; row <= startRow + 1; row++) {
+//            if (row >= 0 & row < board.getHeight()) {
+//                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+//                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
+//                        if (!board.getCell(row, column).getIsFlagged() & !board.getCell(row, column).getIsClear()) {
+//                            attemptClear(row, column);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    // MODIFIES: this, cell
+//    // EFFECTS: preforms clearInRadius if cell is has 0 in Radius
+//    public void floodClear(int row, int column) {
+//        if (board.getCell(row, column).getInRadius() == 0) {
+//            clearInRadius(row, column);
+//        }
+//    }
 }
 

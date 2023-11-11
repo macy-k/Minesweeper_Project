@@ -6,10 +6,10 @@ import model.Game;
 import model.GameLogs;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Used to write objects to json
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

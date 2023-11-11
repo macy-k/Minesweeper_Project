@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Holds game state and facilitates operations on board
 public class Game implements Writable {
     public static final int TICKS_PER_SECOND = 10;
 
@@ -28,6 +29,10 @@ public class Game implements Writable {
         time = 0;
         this.board = board;
     }
+
+//####################################################################
+//Game State Interactions
+//####################################################################
 
     // MODIFIES: this
     // EFFECTS: progresses clock if game is in play. Also checks if game is won, and ends game if so.
@@ -164,6 +169,56 @@ public class Game implements Writable {
     public int getTime() {
         return time;
     }
+
+//####################################################################
+//Board Interactions
+//####################################################################
+
+    // MODIFIES: this, board, cell
+    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
+    public void attemptClear(int row, int column) {
+        Cell cell = board.getCell(row, column);
+        if (!started) {
+            start();
+            board.replaceBombsInRadius(row, column);
+            cell.clear();
+            floodClear(row, column);
+        } else {
+            if (cell.getIsBomb()) {
+                end();
+            } else {
+                cell.clear();
+                floodClear(row, column);
+            }
+        }
+    }
+
+    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
+    // radius is a 0, start flood clear.
+    public void clearInRadius(int startRow, int startColumn) {
+        for (int row = startRow - 1; row <= startRow + 1; row++) {
+            if (row >= 0 & row < board.getHeight()) {
+                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
+                        if (!board.getCell(row, column).getIsFlagged() & !board.getCell(row, column).getIsClear()) {
+                            attemptClear(row, column);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // EFFECTS: preforms clearInRadius if cell has 0 in Radius
+    public void floodClear(int row, int column) {
+        if (board.getCell(row, column).getInRadius() == 0) {
+            clearInRadius(row, column);
+        }
+    }
+
+//####################################################################
+//Json Setup
+//####################################################################
 
     // EFFECTS: converts a game into a json object and returns it
     @Override

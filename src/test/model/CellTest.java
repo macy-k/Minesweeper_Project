@@ -86,40 +86,40 @@ public class CellTest {
     @Test
     public void testIncreaseInRadius() {
         assertEquals(0, c1.getInRadius());
-        c1.increaseInRadius();
+        c1.incrementInRadius(true);
         assertEquals(1, c1.getInRadius());
     }
 
     @Test
     public void testIncreaseInRadiusMultiple() {
         assertEquals(0, c1.getInRadius());
-        c1.increaseInRadius();
-        c1.increaseInRadius();
-        c1.increaseInRadius();
-        c1.increaseInRadius();
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
         assertEquals(4, c1.getInRadius());
     }
 
     @Test
     public void testDecreaseInRadius() {
         assertEquals(0, c1.getInRadius());
-        c1.increaseInRadius();
+        c1.incrementInRadius(true);
         assertEquals(1, c1.getInRadius());
-        c1.decreaseInRadius();
+        c1.incrementInRadius(false);
         assertEquals(0, c1.getInRadius());
     }
 
     @Test
     public void testDecreaseInRadiusMultiple() {
         assertEquals(0, c1.getInRadius());
-        c1.increaseInRadius();
-        c1.increaseInRadius();
-        c1.increaseInRadius();
-        c1.increaseInRadius();
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
+        c1.incrementInRadius(true);
         assertEquals(4, c1.getInRadius());
-        c1.decreaseInRadius();
-        c1.decreaseInRadius();
-        c1.decreaseInRadius();
+        c1.incrementInRadius(false);
+        c1.incrementInRadius(false);
+        c1.incrementInRadius(false);
         assertEquals(1, c1.getInRadius());
     }
 

@@ -4,11 +4,74 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     private Game g;
     private Board b;
+    private static final List<List<Boolean>> bombsListV1 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(true, true, false, true, true),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Boolean>> clearListV1 = Arrays.asList(
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV1 = Arrays.asList(
+            Arrays.asList(1, 1, 0, 0, 0),
+            Arrays.asList(2, 3, 2, 2, 2),
+            Arrays.asList(2, 2, 2, 1, 1),
+            Arrays.asList(2, 2, 2, 2, 2),
+            Arrays.asList(0, 0, 0, 0, 0));
+    private static final List<List<Boolean>> bombsListV2 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(true, false, false, false, true),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(false, false, false, true, false));
+    private static final List<List<Boolean>> clearListV2 = Arrays.asList(
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, true, true, true, false),
+            Arrays.asList(false, true, true, true, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Integer>> inRadiusListV2 = Arrays.asList(
+            Arrays.asList(1, 1, 0, 0, 0),
+            Arrays.asList(1, 2, 0, 1, 1),
+            Arrays.asList(2, 3, 0, 1, 0),
+            Arrays.asList(1, 2, 1, 2, 2),
+            Arrays.asList(1, 1, 1, 0, 1));
+    private static final List<List<Boolean>> clearListV3 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, true, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Boolean>> bombsListV4 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(true, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
+    private static final List<List<Boolean>> clearListV4 = Arrays.asList(
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(true, true, true, true, true),
+            Arrays.asList(false, true, true, true, true),
+            Arrays.asList(false, true, true, true, true));
+    private static final List<List<Integer>> inRadiusListV4 = Arrays.asList(
+            Arrays.asList(0, 0, 0, 0, 0),
+            Arrays.asList(0, 0, 0, 0, 0),
+            Arrays.asList(1, 1, 0, 0, 0),
+            Arrays.asList(0, 1, 0, 0, 0),
+            Arrays.asList(1, 1, 0, 0, 0));
 
     @BeforeEach
     public void runBefore() {
@@ -183,6 +246,92 @@ class GameTest {
         g.moveUp();
         assertEquals(1, g.getX());
         assertEquals(1, g.getY());
+    }
+
+    @Test
+    public void testAttemptClearNotStartedNoReplace() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        g = new Game(b);
+        g.attemptClear(0, 2);
+        assertEquals(bombsListV1, b.getBombsList());
+        assertEquals(clearListV1, b.getClearList());
+        assertEquals(inRadiusListV1, b.getInRadiusList());
+    }
+
+    @Test
+    public void testAttemptClearNotStartedWithReplace() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        g = new Game(b);
+        g.attemptClear(1, 2);
+        assertEquals(bombsListV2, b.getBombsList());
+        assertEquals(clearListV2, b.getClearList());
+        assertEquals(inRadiusListV2, b.getInRadiusList());
+    }
+
+    @Test
+    public void testAttemptClearStartedValidNoFlood() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        g = new Game(b);
+        assertFalse(g.isStarted());
+        assertFalse(g.isEnded());
+        g.start();
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+        g.attemptClear(1, 2);
+        assertEquals(bombsListV1, b.getBombsList());
+        assertEquals(clearListV3, b.getClearList());
+        assertEquals(inRadiusListV1, b.getInRadiusList());
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testAttemptClearStartedValidFlood() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(10);
+        b.generateLayout(1);
+        g = new Game(b);
+        assertFalse(g.isStarted());
+        assertFalse(g.isEnded());
+        g.start();
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+        g.attemptClear(3, 3);
+//        System.out.println(b.getBombsList());
+//        System.out.println(b.getInRadiusList());
+//        System.out.println(b.getClearList());
+        assertEquals(bombsListV4, b.getBombsList());
+        assertEquals(clearListV4, b.getClearList());
+        assertEquals(inRadiusListV4, b.getInRadiusList());
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testAttemptClearOnBomb() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        g = new Game(b);
+        assertFalse(g.isStarted());
+        assertFalse(g.isEnded());
+        g.start();
+        assertTrue(g.isStarted());
+        assertFalse(g.isEnded());
+        g.attemptClear(2, 1);
+        assertTrue(g.isStarted());
+        assertTrue(g.isEnded());
     }
 
     @Test

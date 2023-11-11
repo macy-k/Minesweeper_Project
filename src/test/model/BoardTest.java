@@ -279,7 +279,7 @@ class BoardTest {
         b.setRandomSeed(35);
         b.generateLayout();
         b.getCell(2, 0).setBomb();
-        b.deIncrementSurroundingCells(2, 0);
+        b.incrementSurroundingCells(2, 0, false);
         b.replaceBomb();
         assertEquals(bombsListV7, b.getBombsList());
         assertEquals(inRadiusListV7, b.getInRadiusList());
@@ -325,7 +325,7 @@ class BoardTest {
         b.setRandomSeed(41);
         b.generateLayout(1);
         b.getCell(3, 3).setBomb();
-        b.incrementSurroundingCells(3,3);
+        b.incrementSurroundingCells(3,3, true);
         b.replaceBombsInRadius(4, 4);
         assertEquals(bombsListV11, b.getBombsList());
         assertEquals(inRadiusListV11, b.getInRadiusList());
@@ -338,7 +338,7 @@ class BoardTest {
         b.setWidth(3);
         b.setRandomSeed(25);
         b.generateLayout();
-        b.deIncrementSurroundingCells(2, 0);
+        b.incrementSurroundingCells(2, 0, false);
         assertEquals(inRadiusListV1V2, b.getInRadiusList());
     }
 
@@ -405,7 +405,7 @@ class BoardTest {
         b.setRandomSeed(10);
         b.generateLayout(1);
         b.getCell(3, 3).setBomb();
-        b.incrementSurroundingCells(3,3);
+        b.incrementSurroundingCells(3,3, true);
         assertEquals(1, b.getBombsInRadius(4, 0));
     }
 

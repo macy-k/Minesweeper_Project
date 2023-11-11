@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+// Reads in stored objects from json files
 public class JsonReader {
     private String source;
 
@@ -53,6 +54,14 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    public String getSource() {
+        return source;
+    }
+
+//####################################################################
+//GameLogs
+//####################################################################
+
     // EFFECTS: reads a json object containing a GameLogs into a GameLogs object and returns it
     private GameLogs parseGameLogs(JSONObject jsonObject) {
         GameLogs gl = new GameLogs();
@@ -76,6 +85,10 @@ public class JsonReader {
                 jsonObject.getInt("score"),
                 jsonObject.getInt("time")));
     }
+
+//####################################################################
+//Game
+//####################################################################
 
     // EFFECTS: reads a json object containing a Game into a Game object and returns it
     private Game parseGame(JSONObject jsonObject) {
@@ -128,9 +141,5 @@ public class JsonReader {
                 cellJson.getBoolean("isFlagged"),
                 cellJson.getInt("inRadius"));
         return c;
-    }
-
-    public String getSource() {
-        return source;
     }
 }

@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
-
+// Holds board state and is responsible for board setup and board interactions,
 public class Board implements Writable {
     private static final double RATIO = 0.2063;
     private static final Random rand = new Random();
@@ -18,9 +19,9 @@ public class Board implements Writable {
     
     private int unflaggedBombs;
 
-    //####################################################################
-    //Board Setup
-    //####################################################################
+//####################################################################
+//Board Setup
+//####################################################################
 
     // EFFECTS: initiates standard board with randomized bomb layout
     public Board() {
@@ -86,7 +87,7 @@ public class Board implements Writable {
                 Cell targetCell = layout.get(selectedRow).get(selectedColumn);
                 if (!targetCell.getIsBomb()) {
                     targetCell.setBomb();
-                    incrementSurroundingCells(selectedRow, selectedColumn);
+                    incrementSurroundingCells(selectedRow, selectedColumn,true);
                     placedBomb = true;
                 }
             }
@@ -104,7 +105,7 @@ public class Board implements Writable {
             Cell targetCell = layout.get(selectedRow).get(selectedColumn);
             if (!targetCell.getIsBomb()) {
                 targetCell.setBomb();
-                incrementSurroundingCells(selectedRow, selectedColumn);
+                incrementSurroundingCells(selectedRow, selectedColumn, true);
                 placedBomb = true;
             }
         }
@@ -112,30 +113,14 @@ public class Board implements Writable {
 
     // REQUIRES: non-empty layout
     // MODIFIES: cell
-    // EFFECTS: increments the inRadius field of cells surrounding the starting cell
+    // EFFECTS: increments (decrease or increase) the inRadius field of cells surrounding the starting cell
     // (excluding the starting cell)
-    public void incrementSurroundingCells(int startRow, int startColumn) {
+    public void incrementSurroundingCells(int startRow, int startColumn, Boolean increase) {
         for (int row = startRow - 1; row <= startRow + 1; row++) {
             if (row >= 0 & row < height) {
                 for (int column = startColumn - 1; column <= startColumn + 1; column++) {
                     if (column >= 0 & column < width & !(row == startRow & column == startColumn)) {
-                        getCell(row, column).increaseInRadius();
-                    }
-                }
-            }
-        }
-    }
-
-    // REQUIRES: non-empty layout
-    // MODIFIES: cell
-    // EFFECTS: de-increments the inRadius field of cells surrounding the starting cell
-    // (excluding the starting cell)
-    public void deIncrementSurroundingCells(int startRow, int startColumn) {
-        for (int row = startRow - 1; row <= startRow + 1; row++) {
-            if (row >= 0 & row < height) {
-                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
-                    if (column >= 0 & column < width & !(row == startRow & column == startColumn)) {
-                        getCell(row, column).decreaseInRadius();
+                        getCell(row, column).incrementInRadius(increase);
                     }
                 }
             }
@@ -153,7 +138,7 @@ public class Board implements Writable {
                         if (column >= 0 & column < width) {
                             if (getCell(row, column).getIsBomb()) {
                                 getCell(row, column).setBomb();
-                                deIncrementSurroundingCells(row, column);
+                                incrementSurroundingCells(row, column, false);
                                 replaceBomb();
                             }
                         }
@@ -169,9 +154,9 @@ public class Board implements Writable {
         layout.add(row);
     }
 
-    //####################################################################
-    //Board Interactions
-    //####################################################################
+//####################################################################
+//Board Interactions
+//####################################################################
 
     // REQUIRES: height > 0
     // MODIFIES: this
@@ -206,9 +191,9 @@ public class Board implements Writable {
         unflaggedBombs = unflaggedBombs - change;
     }
 
-    //####################################################################
-    //Get Board Data
-    //####################################################################
+//####################################################################
+//Get Board Data
+//####################################################################
 
     public int getHeight() {
         return height;
@@ -287,6 +272,20 @@ public class Board implements Writable {
     }
 
     // REQUIRES: non-empty layout
+    // EFFECTS: gets arraylist of each cell's isClear field
+    public List<List<Boolean>> getClearList() {
+        List<List<Boolean>> clearList = new ArrayList<>();
+        for (List<Cell> row : layout) {
+            List<Boolean> clearListRow = new ArrayList<>();
+            for (Cell column : row) {
+                clearListRow.add(column.getIsClear());
+            }
+            clearList.add(clearListRow);
+        }
+        return clearList;
+    }
+
+    // REQUIRES: non-empty layout
     // EFFECTS: gets arraylist of each cell's inRadius field
     public List<List<Integer>> getInRadiusList() {
         List<List<Integer>> inRadiusList = new ArrayList<>();
@@ -327,6 +326,10 @@ public class Board implements Writable {
         }
         return (unflaggedAndNotClear == 0);
     }
+
+//####################################################################
+//Json Setup
+//####################################################################
 
     // EFFECTS: converts Board into json object and returns it
     @Override

@@ -7,6 +7,7 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+// holds all Log data for previous games and has methods operating on that data
 public class GameLogs implements Writable {
     private final List<Log> gameLogs;
     private Integer won;
@@ -66,6 +67,10 @@ public class GameLogs implements Writable {
     public Integer getLost() {
         return lost;
     }
+
+//####################################################################
+//Json Setup
+//####################################################################
 
     // EFFECTS: converts a GameLogs into a json object and returns it
     @Override
