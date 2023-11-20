@@ -55,15 +55,24 @@ public class Game implements Writable {
         startTime = System.currentTimeMillis() - (time * 1000);
     }
 
-    // EFFECTS: thakes an integer and formats it into a string used for keeping time in minesweeper. String never
-    // exceeds "999"
+    // EFFECTS: formats the time into a string used for keeping time in minesweeper
     public String getTimeString() {
-        if (time < 10) {
-            return "00" + Integer.toString(time);
-        } else if (time < 100) {
-            return "0" + Integer.toString(time);
-        } else if (time <= 999) {
-            return Integer.toString(time);
+        return toTripleString(time);
+    }
+
+    // EFFECTS: formats the score into a string used for keeping score in minesweeper
+    public String getScoreString() {
+        return toTripleString(board.getUnflaggedBombs());
+    }
+
+    // EFFECTS: takes an integer and formats it into a string used in minesweeper. String never exceeds "999"
+    private String toTripleString(Integer num) {
+        if (num < 10) {
+            return "00" + Integer.toString(num);
+        } else if (num < 100) {
+            return "0" + Integer.toString(num);
+        } else if (num <= 999) {
+            return Integer.toString(num);
         } else {
             return "999";
         }
@@ -128,7 +137,7 @@ public class Game implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets position (for testing purposed)
+    // EFFECTS: sets position
     public void setPosition(int row, int column) {
         posX = column;
         posY = row;

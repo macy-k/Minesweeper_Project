@@ -144,6 +144,9 @@ class BoardTest {
 
 
     private Board b;
+    // USE THE FOLLOWING FOR TESTING
+    //        System.out.println(b.getBombsList());
+    //        System.out.println(b.getInRadiusList());
 
 
     @BeforeEach
@@ -266,8 +269,6 @@ class BoardTest {
         b.setRandomSeed(35);
         b.generateLayout();
         b.replaceBomb();
-//        System.out.println(b.getBombsList());
-//        System.out.println(b.getInRadiusList());
         assertEquals(bombsListV6, b.getBombsList());
         assertEquals(inRadiusListV6, b.getInRadiusList());
     }
@@ -318,19 +319,6 @@ class BoardTest {
         assertEquals(inRadiusListV10, b.getInRadiusList());
     }
 
-//    @Test
-//    public void testReplaceBombsInRadiusInRightCorner() {
-//        b.setHeight(5);
-//        b.setWidth(5);
-//        b.setRandomSeed(41);
-//        b.generateLayout(1);
-//        b.getCell(3, 3).setBomb();
-//        b.incrementSurroundingCells(3,3, true);
-//        b.replaceBombsInRadius(4, 4);
-//        assertEquals(bombsListV11, b.getBombsList());
-//        assertEquals(inRadiusListV11, b.getInRadiusList());
-//    }
-
     @Test
     public void testReplaceBombsInRadiusInRightTopCorner() {
         b.setHeight(5);
@@ -340,8 +328,6 @@ class BoardTest {
         b.getCell(1, 3).setBomb();
         b.incrementSurroundingCells(1,3, true);
         b.replaceBombsInRadius(0, 4);
-//        System.out.println(b.getBombsList());
-//        System.out.println(b.getInRadiusList());
         assertEquals(bombsListV11, b.getBombsList());
         assertEquals(inRadiusListV11, b.getInRadiusList());
     }

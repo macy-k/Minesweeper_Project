@@ -137,6 +137,22 @@ class GameTest {
     }
 
     @Test
+    public void testGetScoreString() {
+        b.generateLayout(38);
+        g = new Game(b);
+        assertEquals("038", g.getScoreString());
+    }
+
+    @Test
+    public void testGetScoreStringPast999() {
+        b.setHeight(32);
+        b.setWidth(32);
+        b.generateLayout(1020);
+        g = new Game(b);
+        assertEquals("999", g.getScoreString());
+    }
+
+    @Test
     public void testWinTickFailNotCleared() {
         b.setHeight(3);
         b.setWidth(3);
