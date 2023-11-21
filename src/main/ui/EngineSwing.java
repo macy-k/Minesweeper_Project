@@ -11,14 +11,14 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 // Operates the game GUI with Swing, handles user inputs and handles ticks
 public class EngineSwing extends JFrame implements Engine, WindowListener {
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
     static final Color backgroundGrey = new Color(51, 51, 51);
     static final Color lightGrey = new Color(188,188, 188);
-    static final Color shadowGrey = new Color(116, 116, 116);
+    static final Color highlight = new Color(255,255,255);
+    static final Color shadow = new Color(116, 116, 116);
     static final Color endRed = new Color(252, 4, 4);
 
     private MineSweeper top;
@@ -62,7 +62,8 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
 
         bp = new BoardPanel(game);
         mp = new MenuPanel(this, game);
-        mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadowGrey));
+        bp.setBorder(BorderFactory.createLineBorder(shadow, 3, false));
+        mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadow));
 
         createScrollPane();
         getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -91,7 +92,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 game.tick();
-//                gp.repaint();
+                bp.update();
                 mp.update();
 
             }

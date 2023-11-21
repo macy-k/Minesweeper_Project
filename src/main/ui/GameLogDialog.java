@@ -20,10 +20,10 @@ public class GameLogDialog extends JDialog {
         start();
     }
 
-    // Starts Dialog box
+    // EFFECTS: Starts Dialog box
     public void start() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(350, 400);
+        setSize(400, 450);
         setMinimumSize(new Dimension(320, 100));
         contentPane.setBackground(lightGrey);
 
@@ -81,7 +81,7 @@ public class GameLogDialog extends JDialog {
             text.setBackground(Color.WHITE);
             text.setOpaque(false);
             text.setText(message);
-            text.setFont(new Font("Dialog", Font.PLAIN, 15));
+            text.setFont(new Font("Dialog", Font.BOLD, 15));
             return text;
         }
 

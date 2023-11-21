@@ -40,8 +40,9 @@ public class MineSweeper {
         gameLogs = readGameLogs();
 
         if (engineUsesSwing) {
-            resetBoard();
-            tryInitiate(swingOrLanterna(board));
+//            resetBoard();
+//            tryInitiate(swingOrLanterna(board));
+            tryLoad();
         } else {
             consoleMenu();
         }
