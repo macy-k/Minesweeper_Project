@@ -62,11 +62,11 @@ EXTRA
 Phase 3:
 **Instructions for Grader**
 - You can generate the first required action related to the user story "adding multiple Xs to a Y" by changing the dimensions of the board
-    with the "change dimensions" selector
+    with the "dimensions" selector
 - You can generate the second required action related to the user story "adding multiple Xs to a Y" by using the reset button to reset the board
     with the given dimensions and start a new game
 - You can locate my visual component by looking in the images folder of the project. There I have the pixel art that I made myself 
-    and use for the timer and for the flags and bombs.
+    and use for the timer, the flags, the bombs, and the smiley face on the reset button.
 - You can save the state of my application by clicking the save button. There are also automatically saving game logs that can be
     viewed and reset
 - You can reload the state of my application by clicking the load game button

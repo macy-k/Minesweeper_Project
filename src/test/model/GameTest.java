@@ -78,6 +78,12 @@ class GameTest {
             Arrays.asList(true, true, true, true, true),
             Arrays.asList(false, true, true, true, true),
             Arrays.asList(false, true, true, true, true));
+    private static final List<List<Boolean>> clearListV6 = Arrays.asList(
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false),
+            Arrays.asList(false, false, false, false, false));
 
     @BeforeEach
     public void runBefore() {
@@ -314,6 +320,30 @@ class GameTest {
         assertEquals(inRadiusListV1, b.getInRadiusList());
         assertTrue(g.isStarted());
         assertFalse(g.isEnded());
+    }
+
+    @Test
+    public void testAttemptClearEnded() {
+        b.setHeight(5);
+        b.setWidth(5);
+        b.setRandomSeed(35);
+        b.generateLayout();
+        g = new Game(b);
+        assertFalse(g.isStarted());
+        assertFalse(g.isEnded());
+        g.start();
+        g.end();
+        assertTrue(g.isStarted());
+        assertTrue(g.isEnded());
+        g.attemptClear(1, 2);
+//        System.out.println(b.getBombsList());
+//        System.out.println(b.getInRadiusList());
+//        System.out.println(b.getClearList());
+        assertEquals(bombsListV1, b.getBombsList());
+        assertEquals(clearListV6, b.getClearList());
+        assertEquals(inRadiusListV1, b.getInRadiusList());
+        assertTrue(g.isStarted());
+        assertTrue(g.isEnded());
     }
 
     @Test
