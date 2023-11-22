@@ -2,7 +2,6 @@
 
 package ui;
 
-import model.Board;
 import model.Cell;
 import model.Game;
 import model.Log;
@@ -11,6 +10,8 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 // Operates the game GUI with Swing, handles user inputs and handles ticks
 public class EngineSwing extends JFrame implements Engine, WindowListener {
@@ -22,63 +23,58 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     static final Color endRed = new Color(252, 4, 4);
 
     private MineSweeper top;
-    private Board board;
     private Game game;
     private JsonWriter jsonWriterGame;
+    private Timer timer;
 
+    private Container contentPane;
+    private JPanel centeredBpHolder;
     private JScrollPane scrollPane;
     private BoardPanel bp;
     private MenuPanel mp;
 
 
-    // EFFECTS: Initiates EngineSwing with given Board
-    public EngineSwing(MineSweeper top, Board board) {
-        super("Minesweeper");
-        this.board = board;
-        this.top = top;
-        jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
-        game = new Game(board);
-    }
-
     // EFFECTS: Initiates EngineSwing with given Game
     public EngineSwing(MineSweeper top, Game game) {
         super("Minesweeper");
-        this.board = game.getBoard();
         this.top = top;
         jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
         this.game = game;
     }
 
-    // EFFECTS: specifies terminal of size needed for given board and creates screen. Once game is over returns
-    // a log of the game
-    public Log start() {
+    // MODIFIES: this
+    // EFFECTS: specifies terminal for given board and organizes top-level specifics and child components.
+    public void start() throws IOException, InterruptedException {
         addWindowListener(this);
         setUndecorated(false);
         setIconImage(new ImageIcon("./images/Mine.png").getImage());
-        setSize(700, 600);
-        setMinimumSize(new Dimension(600, 400));
+        setMinimumSize(new Dimension(1050, 600));
+        setPreferredSize(new Dimension(800, 600));
+        setSize(new Dimension(800, 600));
         setLayout(new BorderLayout());
-        getContentPane().setBackground(backgroundGrey);
+        contentPane = getContentPane();
+        contentPane.setBackground(backgroundGrey);
 
         bp = new BoardPanel(game);
-        mp = new MenuPanel(this, game);
+        mp = new MenuPanel(this);
         bp.setBorder(BorderFactory.createLineBorder(shadow, 3, false));
         mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadow));
 
         createScrollPane();
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
-        getContentPane().add(mp, BorderLayout.NORTH);
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(mp, BorderLayout.NORTH);
         pack();
 
         addKeyListener(new KeyHandler());
         centreOnScreen();
         setVisible(true);
         tick();
-        return new Log(game.isIncomplete(), game.isWon(), board.getCorrectlyFlaggedBombs(), game.getTime());
     }
 
+    // MODIFIES: this
+    // EFFECTS: initiates scrollPane used for BoardPanel
     private void createScrollPane() {
-        JPanel centeredBpHolder = new JPanel();
+        centeredBpHolder = new JPanel();
         centeredBpHolder.setBackground(backgroundGrey);
         centeredBpHolder.setLayout(new GridBagLayout());
         centeredBpHolder.add(bp);
@@ -86,9 +82,10 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
         scrollPane.setBorder(BorderFactory.createLineBorder(backgroundGrey, 0, false));
     }
 
+    // MODIFIES: this, game, BoardPanel, MenuPanel
     // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over.
     private void tick() {
-        Timer t = new Timer(Game.TICKS_PER_SECOND, new ActionListener() {
+        timer = new Timer(Game.TICKS_PER_SECOND, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 game.tick();
@@ -98,7 +95,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
             }
         });
 
-        t.start();
+        timer.start();
     }
 
     // MODIFIES: this
@@ -109,15 +106,82 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     }
 
 //####################################################################
-// ???
+// Game Methods
 //####################################################################
 
-    public String getGameLogs() {
-        return top.getGameLogs();
+    // MODIFIES: this, game, gamelogs, BoardPanel, MenuPanel
+    // EFFECTS: saves previous game to logs if it was started and starts a new game
+    public void newGame(Game game) throws IOException, InterruptedException {
+        if (this.game.isStarted()) {
+            top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
+                    this.game.getBoard().getCorrectlyFlaggedBombs(), this.game.getTime()));
+        }
+        timer.stop();
+        this.game = game;
+        contentPane.removeAll();
+
+        bp = new BoardPanel(game);
+        mp = new MenuPanel(this);
+        bp.setBorder(BorderFactory.createLineBorder(shadow, 3, false));
+        mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadow));
+
+        createScrollPane();
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(mp, BorderLayout.NORTH);
+        pack();
+        tick();
     }
 
-    public void changeBoard(Board board) {
-        this.board = board;
+    // MODIFIES: this, game, gamelogs, BoardPanel, MenuPanel
+    // EFFECTS: saves previous game to logs if it was started with a given score and starts a new game
+    public void newGame(Game game, Integer score) throws IOException, InterruptedException {
+        if (this.game.isStarted()) {
+            top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
+                    score, this.game.getTime()));
+        }
+        timer.stop();
+        this.game = game;
+        contentPane.removeAll();
+
+        bp = new BoardPanel(game);
+        mp = new MenuPanel(this);
+        bp.setBorder(BorderFactory.createLineBorder(shadow, 3, false));
+        mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadow));
+
+        createScrollPane();
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(mp, BorderLayout.NORTH);
+        pack();
+        tick();
+    }
+
+    // MODIFIES: json files
+    // EFFECTS: saves game if not started
+    public void saveGame() {
+        if (!game.isStarted()) {
+            //for future: create WarningDialog popup with "Cannot save un-started game"
+            return;
+        }
+        try {
+            jsonWriterGame.open();
+            jsonWriterGame.write(game);
+            jsonWriterGame.close();
+        } catch (FileNotFoundException e) {
+            //for future: create WarningDialog popup with "Unable to write to file"
+        }
+    }
+
+    // EFFECTS: gets gameLogs String from toplevel Minesweeper (which holds the game logs)
+    public String getGameLogs() {
+        return top.getGameLogString();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public MineSweeper getTop() {
+        return top;
     }
 
 //####################################################################
@@ -132,23 +196,23 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
         public void keyTyped(KeyEvent e) {
             char stroke = e.getKeyChar();
             if (stroke == ' ') {
-                //game.setPosition(mouse Y(row), mouse X(column);
                 determineSpaceAction();
-            } else if (stroke == 'c') {
-                //game.setPosition(mouse Y(row), mouse X(column);
-                game.attemptClear(game.getY(), game.getX());
             }
         }
 
-        // MODIFIES: board, cell
+        // MODIFIES: board, CellLabel, cell
         // EFFECTS: determines what action the space key should do based on cursor position, be it either toggling
-        // the flag of an uncleared cell or clearing the radius of cleared cell
+        //      the flag of an uncleared cell or clearing the radius of cleared cell. Also funnels through BoardPanel
+        //      methods to ensure CellLabel graphics update
         private void determineSpaceAction() {
-            Cell cell = board.getCell(game.getY(), game.getX());
-            if (!cell.getIsClear()) {
-                board.changeUnflaggedBombs(cell.toggleFlag());
-            } else if (board.getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
-                game.clearInRadius(game.getY(), game.getX());
+            if (!game.isEnded()) {
+                Cell cell = game.getBoard().getCell(game.getY(), game.getX());
+                if (!cell.getIsClear()) {
+                    game.getBoard().changeUnflaggedBombs(cell.toggleFlag());
+                    bp.getCellLabel(game.getY(), game.getX()).updateLabelType();
+                } else if (game.getBoard().getFlaggedInRadius(game.getY(), game.getX()) == cell.getInRadius()) {
+                    bp.clearInRadius(game.getY(), game.getX());
+                }
             }
         }
     }
@@ -162,20 +226,25 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
 
     }
 
+    // MODIFIES: game, GameLogs
+    // EFFECTS: when window is closed, save current game to gameLogs if it has been started
     @Override
     public void windowClosing(WindowEvent e) {
-        System.out.println("CLOSED :)");
-//        try {
-//            top.writeGameToLogs(new Log(game.isIncomplete(),
-//                    game.isWon(),
-//                    board.getCorrectlyFlaggedBombs(),
-//                    game.getTime()));
-//        } catch (IOException | InterruptedException ex) {
-//            //game is already closing, do nothing
-//        } finally {
-//            System.exit(0);
-//        }
-        System.exit(0);
+        try {
+            if (game.isStarted()) {
+                if (!game.isEnded()) {
+                    game.incomplete();
+                }
+                top.writeGameToLogs(new Log(game.isIncomplete(),
+                        game.isWon(),
+                        game.getBoard().getCorrectlyFlaggedBombs(),
+                        game.getTime()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            //game is already closing, do nothing
+        } finally {
+            System.exit(0);
+        }
     }
 
     @Override

@@ -50,6 +50,20 @@ public class GameLogsTest {
     }
 
     @Test
+    public void testClearLogs() {
+        gameLogs.addLog(L1);
+        gameLogs.addLog(L2);
+        gameLogs.addLog(L3);
+        gameLogs.addLog(L4);
+        gameLogs.addLog(L5);
+        gameLogs.addLog(L6);
+        gameLogs.addLog(L7);
+        assertEquals(7, gameLogs.getGameLogs().size());
+        gameLogs.clearLogs();
+        assertEquals(0, gameLogs.getGameLogs().size());
+    }
+
+    @Test
     public void testPrintGameLogsEmpty() {
         assertEquals("No Logs\n", gameLogs.printGameLogs());
     }

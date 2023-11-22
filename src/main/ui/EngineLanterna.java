@@ -30,27 +30,22 @@ public class EngineLanterna implements Engine {
     private TerminalSize terminalSize;
     private Screen screen;
 
+    private MineSweeper top;
     private Board board;
     private Game game;
     private JsonWriter jsonWriterGame;
 
-    // EFFECTS: Initiates EngineLanterna with given Board
-    public EngineLanterna(Board board) {
-        this.board = board;
-        jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
-        game = new Game(board);
-    }
-
     // EFFECTS: Initiates EngineLanterna with given Game
-    public EngineLanterna(Game game) {
+    public EngineLanterna(MineSweeper top, Game game) {
         this.board = game.getBoard();
+        this.top = top;
         jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
         this.game = game;
     }
 
     // EFFECTS: specifies terminal of size needed for given board and creates screen. Once game is over returns
     // a log of the game
-    public Log start() throws IOException, InterruptedException {
+    public void start() throws IOException, InterruptedException {
         Integer setTerminalWidth = board.getWidth();
         if (setTerminalWidth < 14) {
             setTerminalWidth = 14;
@@ -68,7 +63,8 @@ public class EngineLanterna implements Engine {
         gui = new MultiWindowTextGUI(screen);
 
         beginTicks();
-        return new Log(game.isIncomplete(), game.isWon(), board.getCorrectlyFlaggedBombs(), game.getTime());
+        top.writeGameToLogs(new Log(game.isIncomplete(), game.isWon(),
+                board.getCorrectlyFlaggedBombs(), game.getTime()));
     }
 
     // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over.
@@ -335,50 +331,15 @@ public class EngineLanterna implements Engine {
         }
     }
 
-// MOVED THESE METHODS TO A MORE RELEVANT CLASS. HOLDING RECORDS JUST IN CASE I HAVE TO MOVE THEM BACK
+    // MODIFIES: this
+    // EFFECTS: starts a new game
+    public void newGame(Game game) throws IOException, InterruptedException {
+        this.game = game;
+        this.board = game.getBoard();
+    }
 
-
-//    // MODIFIES: game, cell
-//    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
-//    public void attemptClear(int row, int column) {
-//        Cell cell = board.getCell(row, column);
-//        if (!game.isStarted()) {
-//            game.start();
-//            board.replaceBombsInRadius(row, column);
-//            cell.clear();
-//            floodClear(row, column);
-//        } else {
-//            if (cell.getIsBomb()) {
-//                game.end();
-//            } else {
-//                cell.clear();
-//                floodClear(row, column);
-//            }
-//        }
-//    }
-//
-//    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
-//    // radius is a 0, start flood clear.
-//    public void clearInRadius(int startRow, int startColumn) {
-//        for (int row = startRow - 1; row <= startRow + 1; row++) {
-//            if (row >= 0 & row < board.getHeight()) {
-//                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
-//                    if (column >= 0 & column < board.getWidth() & !(row == startRow & column == startColumn)) {
-//                        if (!board.getCell(row, column).getIsFlagged() & !board.getCell(row, column).getIsClear()) {
-//                            attemptClear(row, column);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    // MODIFIES: this, cell
-//    // EFFECTS: preforms clearInRadius if cell is has 0 in Radius
-//    public void floodClear(int row, int column) {
-//        if (board.getCell(row, column).getInRadius() == 0) {
-//            clearInRadius(row, column);
-//        }
-//    }
+    public Game getGame() {
+        return game;
+    }
 }
 

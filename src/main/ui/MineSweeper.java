@@ -2,6 +2,7 @@
 
 package ui;
 
+import exceptions.NoSavedGameException;
 import model.Board;
 import model.Game;
 import model.GameLogs;
@@ -21,11 +22,10 @@ public class MineSweeper {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
     private static final String JSON_STORE_LOG = "./data/Logs.json";
-    private static final Boolean engineUsesSwing = true;  // USER CHANGE THIS TO SWITCH ENGINES
 
-    private Board board;
-    private Integer rows = 16;
-    private Integer columns = 30;
+    private static final Boolean engineUsesSwing = false;  // USER CHANGE THIS TO SWITCH ENGINES
+
+    private Engine engine;
     private GameLogs gameLogs;
     private JsonReader jsonReaderGame;
     private JsonWriter jsonWriterLog;
@@ -33,16 +33,14 @@ public class MineSweeper {
 
     // EFFECTS: starts minesweeper game.
     public MineSweeper() throws IOException, InterruptedException {
-        board = new Board();
         jsonReaderGame = new JsonReader(JSON_STORE_GAME);
         jsonWriterLog = new JsonWriter(JSON_STORE_LOG);
         jsonReaderLog = new JsonReader(JSON_STORE_LOG);
         gameLogs = readGameLogs();
+        engine = swingOrLanterna(new Game(new Board()));
 
         if (engineUsesSwing) {
-//            resetBoard();
-//            tryInitiate(swingOrLanterna(board));
-            tryLoad();
+            initiateEngineAndLogs();
         } else {
             consoleMenu();
         }
@@ -61,10 +59,14 @@ public class MineSweeper {
                 getNewDimensions();
             } else if (Objects.equals(command, "S")) {
                 gameInstructions();
-                resetBoard();
-                tryInitiate(swingOrLanterna(board));
+                resetGame();
+                initiateEngineAndLogs();
             } else if (Objects.equals(command, "L")) {
-                tryLoad();
+                try {
+                    loadGame();
+                } catch (NoSavedGameException e) {
+                    System.out.print("\nThere is no saved file yet, so a file cannot be loaded.\n\n");
+                }
             } else if (Objects.equals(command, "V")) {
                 System.out.println(gameLogs.printGameLogs());
             } else if (Objects.equals(command, "E")) {
@@ -73,6 +75,14 @@ public class MineSweeper {
                 System.out.println("Not a valid command");
             }
         }
+    }
+
+    // EFFECTS: prints game cycle instructions
+    public void gameCycleInstructions() {
+        System.out.println("Game Dimensions are currently " + engine.getGame().getBoard().getHeight() + " rows by "
+                + engine.getGame().getBoard().getWidth() + " columns.");
+        System.out.println("Can either choose the game Dimensions (D), Start Game (S), "
+                + "Load Game (L), View Game Logs (V), or Exit (E). ");
     }
 
     // EFFECTS: prints instruction for playing game.
@@ -87,12 +97,21 @@ public class MineSweeper {
         System.out.println();
     }
 
-    // EFFECTS: prints game cycle instructions
-    public void gameCycleInstructions() {
-        System.out.println("Game Dimensions are currently " + rows + " rows by "
-                + columns + " columns.");
-        System.out.println("Can either choose the game Dimensions (D), Start Game (S), "
-                + "Load Game (L), View Game Logs (V), or Exit (E). ");
+    // MODIFIES: this
+    // EFFECTS: changes dimensions that will be used to reset board as specified by user
+    public void getNewDimensions() throws IOException {
+        System.out.print("Rows: ");
+        int rows = Integer.parseInt(reader.readLine());
+        System.out.print("Columns: ");
+        int columns = Integer.parseInt(reader.readLine());
+        if (rows > 0 & columns > 0) {
+            engine.getGame().getBoard().setWidth(columns);
+            engine.getGame().getBoard().setHeight(rows);
+            engine.getGame().getBoard().generateLayout();
+            System.out.println();
+        } else {
+            System.out.println("Failed. Dimensions must be positive non-zero integers.");
+        }
     }
 
 //####################################################################
@@ -100,55 +119,44 @@ public class MineSweeper {
 //####################################################################
 
     // MODIFIES: this
-    // EFFECTS: changes dimensions that will be used to reset board as specified by user
-    public void getNewDimensions() throws IOException {
-        System.out.print("Rows: ");
-        Integer rows = Integer.valueOf(reader.readLine());
-        System.out.print("Columns: ");
-        Integer columns = Integer.valueOf(reader.readLine());
-        if (rows > 0 & columns > 0) {
-            this.rows = rows;
-            this.columns = columns;
-            System.out.println();
-        } else {
-            System.out.println("Failed. Dimensions must be positive non-zero integers.");
-        }
-    }
-
-    // MODIFIES: board
-    // EFFECTS: reset board with current rows and columns
-    public void resetBoard() {
-        board.setHeight(rows);
-        board.setWidth(columns);
-        board.generateLayout();
-    }
-
-    // MODIFIES: this
     // EFFECTS: starts engine and update logs after game is over
-    public void initiateEngineAndLogs(Engine gameHandler) throws IOException, InterruptedException {
-//        gameLogs.addLog(gameHandler.start());
-//        jsonWriterLog.open();
-//        jsonWriterLog.write(gameLogs);
-//        jsonWriterLog.close();
-        gameHandler.start();
+    public void initiateEngineAndLogs() throws IOException, InterruptedException {
+        engine.start();
+        jsonWriterLog.open();
+        jsonWriterLog.write(gameLogs);
+        jsonWriterLog.close();
     }
 
-    // EFFECTS: tries to initiate a game  into an engine
-    public void tryInitiate(Engine gameHandler) throws InterruptedException {
-        try {
-            initiateEngineAndLogs(gameHandler);
-        } catch (IOException e) {
-            System.out.print("\nStart failed. IOException.\n\n");
+    // EFFECTS: tries to start and load a game file into a new engine
+    public void loadGame() throws InterruptedException, IOException, NoSavedGameException {
+        Game savedGame = readGame();
+        savedGame.start();
+        engine.newGame(savedGame);
+        initiateEngineAndLogs();
+    }
+
+    // EFFECTS: returns engine using swing or lanterna based on set final boolean engineUsesSwing. Takes Game
+    private Engine swingOrLanterna(Game g) {
+        if (engineUsesSwing) {
+            return new EngineSwing(this, g);
+        } else {
+            return new EngineLanterna(this, g);
         }
     }
 
-    // EFFECTS: tries to load a game file into an engine
-    public void tryLoad() throws InterruptedException {
+    // MODIFIES: game, board
+    // EFFECTS: reset board with current rows and columns
+    public void resetGame() throws IOException, InterruptedException {
+        engine.getGame().getBoard().generateLayout();
+        engine.newGame(new Game(engine.getGame().getBoard()));
+    }
+
+    // EFFECTS: reads saved game. Throws IOException.
+    public Game readGame() throws NoSavedGameException {
         try {
-            Engine gameHandler = readGame();
-            initiateEngineAndLogs(gameHandler);
+            return jsonReaderGame.readGame();
         } catch (IOException e) {
-            System.out.print("\nThere is no saved file yet, so a file cannot be loaded.\n\n");
+            throw new NoSavedGameException();
         }
     }
 
@@ -161,13 +169,6 @@ public class MineSweeper {
         }
     }
 
-    // EFFECTS: reads in saved game and starts it. Assigns it to a new EngineLanterna constructor. Throws IOException.
-    private Engine readGame() throws IOException {
-        Game g = jsonReaderGame.readGame();
-        g.start();
-        return swingOrLanterna(g);
-    }
-
     // MODIFIES: this
     // EFFECTS: writes a log to game logs
     public void writeGameToLogs(Log log) throws IOException, InterruptedException {
@@ -177,31 +178,17 @@ public class MineSweeper {
         jsonWriterLog.close();
     }
 
-    // EFFECTS: returns engine using swing or lanterna based on set final boolean engineUsesSwing. Takes Game
-    private Engine swingOrLanterna(Game g) {
-        if (engineUsesSwing) {
-            return new EngineSwing(this, g);
-        } else {
-            return new EngineLanterna(g);
-        }
-    }
-
-    // EFFECTS: returns engine using swing or lanterna based on set final boolean engineUsesSwing. Takes Board
-    private Engine swingOrLanterna(Board b) {
-        if (engineUsesSwing) {
-            return new EngineSwing(this, b);
-        } else {
-            return new EngineLanterna(b);
-        }
-    }
-
     // EFFECT: returns string equivalent of game logs
-    public String getGameLogs() {
+    public String getGameLogString() {
         try {
             return gameLogs.printGameLogs();
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public GameLogs getGameLogs() {
+        return gameLogs;
     }
 
 

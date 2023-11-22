@@ -12,8 +12,8 @@ public class Game implements Writable {
     private boolean started;
     private boolean incomplete;
     private boolean won;
-    private int posX; // column
-    private int posY; // row
+    private Integer posX; // column
+    private Integer posY; // row
     private long startTime;
     private int time;
 
@@ -138,7 +138,7 @@ public class Game implements Writable {
 
     // MODIFIES: this
     // EFFECTS: sets position
-    public void setPosition(int row, int column) {
+    public void setPosition(Integer row, Integer column) {
         posX = column;
         posY = row;
     }
@@ -159,11 +159,11 @@ public class Game implements Writable {
         return won;
     }
 
-    public int getX() {
+    public Integer getX() {
         return posX;
     }
     
-    public int getY() {
+    public Integer getY() {
         return posY;
     }
 
@@ -187,17 +187,19 @@ public class Game implements Writable {
     // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
     public void attemptClear(int row, int column) {
         Cell cell = board.getCell(row, column);
-        if (!started) {
-            start();
-            board.replaceBombsInRadius(row, column);
-            cell.clear();
-            floodClear(row, column);
-        } else {
-            if (cell.getIsBomb()) {
-                end();
-            } else {
+        if (!ended) {
+            if (!started) {
+                start();
+                board.replaceBombsInRadius(row, column);
                 cell.clear();
                 floodClear(row, column);
+            } else {
+                if (cell.getIsBomb()) {
+                    end();
+                } else {
+                    cell.clear();
+                    floodClear(row, column);
+                }
             }
         }
     }

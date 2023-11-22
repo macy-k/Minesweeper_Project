@@ -3,11 +3,11 @@
 
 I want to make a minesweeper game where:
 - There is a ui window with a standard grid of 30x16 cells, a mine count, a timer, 
-        a reset button, a save button, a game-dimension selector, and (maybe) a mode selection panel.
+        a reset button, a save button, a load button, and game-dimension selector.
 - *YOU CAN CHOOSE DIMENSIONS OF GAME* in the game-dimension selector, so there can be **an arbitrary number of cells**.
 - All cells will be blank at the start until first user input that starts timer.
 - The first click will be guaranteed safe by removing any bombs in the vicinity of your first click and moving them
-    to the top left corner, or the closest free cell to the right of the top left corner. This clears an initial area
+    to a random free spot on the board (that isn't also in the initial vicinity). This clears an initial area
 - From there, aside from initial area, bombs will be randomly distributed throughout remaining cells.
         Then the remaining non-bomb cells will be designated a number based on how many bombs are nearby.
 - Timer will start to tick up. Save button will now be able so save game state, so you can exit the application 
@@ -19,11 +19,10 @@ I want to make a minesweeper game where:
 - If you attempt to clear a cell that has no bomb in it, it works. Otherwise, if there is a bomb the game ends,
         the ui displays all the bombs and stops the timer.
 
-The mode selection panel will be if I get really ambitious and make an auto-solver, but that might be done
-        on my own time and not for this project.
+I get really ambitious I want to try making an auto-solver, but that will be done on my own time and not for this project.
 
 I would also like to have a theme selection panel where you can choose from a set of color themes
-  for the minesweeper game. This is not necessary and is just extra, if I have time.
+  for the minesweeper game. Again, this will probably be on my own time.
 
 **NOTE**: this is not going to work very well as a console based application, and selecting which cell
 to interact with will be clunky. Same with selecting dimensions.
@@ -59,4 +58,18 @@ EXTRA
 - as a user I want all my complete and incomplete games to be stored in a game log which I can view
 - as a user I want to see the number of games I've finished, the number of games I've won, and my win rate when I view my game logs.
 - as a user I want the game panel to show me my score and indicate whether a game is incomplete, won, or lost after the game is finished.
+
+Phase 3:
+**Instructions for Grader**
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by changing the dimensions of the board
+    with the "change dimensions" selector
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by using the reset button to reset the board
+    with the given dimensions and start a new game
+- You can locate my visual component by looking in the images folder of the project. There I have the pixel art that I made myself 
+    and use for the timer and for the flags and bombs.
+- You can save the state of my application by clicking the save button. There are also automatically saving game logs that can be
+    viewed and reset
+- You can reload the state of my application by clicking the load game button
+- Note that previous version of my game that used Lantern can still be accessed by changing the field 'engineUsesSwing'
+    in the 'MineSweeper' class to false.
 

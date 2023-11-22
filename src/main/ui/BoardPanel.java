@@ -10,67 +10,129 @@ import java.util.List;
 
 import static ui.EngineSwing.lightGrey;
 
-// class used to represent board component
+// class used to represent board component of gui
 public class BoardPanel extends JPanel implements Scrollable {
     static final Integer cellSideLength = 27;
     private Game game;
+    List<List<CellLabel>> cellLabelLayout;
 
-    private GridLayout layout;
-
+    private GridLayout layoutManager;
 
     public BoardPanel(Game game) {
         this.game = game;
-        Integer width = game.getBoard().getWidth() * cellSideLength;
-        Integer height = game.getBoard().getHeight() * cellSideLength;
-        setMinimumSize(new Dimension(width, height));
-        setMaximumSize(new Dimension(width, height));
-        setPreferredSize(new Dimension(width, height));
+        constrainBoardSize();
         setBackground(lightGrey); // Use to look for errors
-        layout = new GridLayout(game.getBoard().getHeight(), game.getBoard().getWidth());
-        layout.setHgap(0);
-        layout.setVgap(0);
-        setLayout(layout);
+        layoutManager = new GridLayout(game.getBoard().getHeight(), game.getBoard().getWidth());
+        layoutManager.setHgap(0);
+        layoutManager.setVgap(0);
+        setLayout(layoutManager);
         drawBoard();
     }
 
+    // EFFECTS: updates board graphics
     public void update() {
-        removeAll();
         if (game.isEnded()) {
-            drawGameOverBoard();
-        } else {
-            // shouldn't do something each tick, should only change when action occurs
+            removeAll();
             drawBoard();
+            revalidate();
         }
         revalidate();
     }
 
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        drawBoard(g);
-//
-//        if (game.isEnded()) {
-//            gameOverBoard(g);
-//        }
-//    }
+    // MODIFIES: this
+    // EFFECTS: constrains board size according to the board assigned to game
+    public void constrainBoardSize() {
+        int width = game.getBoard().getWidth() * cellSideLength;
+        int height = game.getBoard().getHeight() * cellSideLength;
+        setMinimumSize(new Dimension(width, height));
+        setMaximumSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(width, height));
+    }
 
+    // MODIFIES: this
+    // EFFECTS: draws board by adding CellLabels to GridLayout in order of board.layout. CellLabels are determined by
+    //      each cell's state and the game state
     private void drawBoard() {
+        cellLabelLayout = new ArrayList<>();
+        Integer rowNum = 0;
         for (List<Cell> row : game.getBoard().getLayout()) {
+            List<CellLabel> labelRow = new ArrayList<>();
+            Integer colNum = 0;
             for (Cell cell : row) {
-                add(new CellLabel(cell));
+                CellLabel c = new CellLabel(cell, rowNum, colNum, this);
+                add(c);
+                labelRow.add(c);
+                colNum++;
+            }
+            cellLabelLayout.add(labelRow);
+            rowNum++;
+        }
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public List<List<CellLabel>> getCellLabelLayout() {
+        return cellLabelLayout;
+    }
+
+//####################################################################
+// CellLabel Management
+//####################################################################
+
+// These methods are exact copies of the clear methods in Game, except they funnel through CellLabel.clear() first
+
+    // MODIFIES: game, board, cellLabel, cell
+    // EFFECTS: attempts to clear a cell, which either succeeds or ends game. Also initiates game if not started.
+    //      Reflects these changes through CellLabel and updates CellLabel along the way.
+    public void attemptClear(int row, int column) {
+        CellLabel cellLabel = getCellLabel(row, column);
+        if (!game.isEnded()) {
+            if (!game.isStarted()) {
+                game.start();
+                game.getBoard().replaceBombsInRadius(row, column);
+                cellLabel.clear();
+                floodClear(row, column);
+            } else {
+                if (cellLabel.getCell().getIsBomb()) {
+                    game.end();
+                } else {
+                    cellLabel.clear();
+                    floodClear(row, column);
+                }
             }
         }
     }
 
-    private void drawGameOverBoard() {
-        //stub
+    // EFFECTS: attempts to clear all cells in radius of given cell (excluding given cell). If a clear cell in
+    // radius is a 0, start flood clear.
+    public void clearInRadius(int startRow, int startColumn) {
+        for (int row = startRow - 1; row <= startRow + 1; row++) {
+            if (row >= 0 & row < game.getBoard().getHeight()) {
+                for (int column = startColumn - 1; column <= startColumn + 1; column++) {
+                    if (column >= 0 & column < game.getBoard().getWidth()
+                            & !(row == startRow & column == startColumn)) {
+                        if (!game.getBoard().getCell(row, column).getIsFlagged()
+                                & !game.getBoard().getCell(row, column).getIsClear()) {
+                            attemptClear(row, column);
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    public void newGame(Game game) {
-        this.game = game;
-        layout.setRows(game.getBoard().getHeight());
-        layout.setColumns(game.getBoard().getWidth());
-        // probably more
+    // EFFECTS: preforms clearInRadius if cell has 0 in Radius
+    public void floodClear(int row, int column) {
+        if (getCellLabel(row, column).getCell().getInRadius() == 0) {
+            clearInRadius(row, column);
+        }
+    }
+
+    // EFFECTS: returns CellLabel from CellLabelLayout at given point
+    public CellLabel getCellLabel(int row, int column) {
+        return cellLabelLayout.get(row).get(column);
     }
 
 //####################################################################

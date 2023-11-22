@@ -9,7 +9,7 @@ import java.util.List;
 
 // holds all Log data for previous games and has methods operating on that data
 public class GameLogs implements Writable {
-    private final List<Log> gameLogs;
+    private List<Log> gameLogs;
     private Integer won;
     private Integer lost;
 
@@ -31,6 +31,14 @@ public class GameLogs implements Writable {
                 lost++;
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes all current logs
+    public void clearLogs() {
+        gameLogs = new ArrayList<>();
+        won = 0;
+        lost = 0;
     }
 
     // EFFECTS: returns string of all game logs in human-readable form, ready for printing

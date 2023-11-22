@@ -2,9 +2,10 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
+import java.io.*;
+import java.nio.file.Paths;
 
-import static ui.EngineSwing.lightGrey;
+import static ui.EngineSwing.*;
 
 // Creates and operates the dialog box that shows GameLogs
 public class GameLogDialog extends JDialog {
@@ -52,19 +53,24 @@ public class GameLogDialog extends JDialog {
     private void createButtonPanel() {
         buttonPanel = new JPanel();
         JButton button = new JButton("Press to Reset Game Logs");
+        button.setBackground(lightGrey);
+        button.setBorder(new CellBevelBorder(highlight, shadow, shadow, highlight, 3));
         button.setFocusable(false);
-        button.setPreferredSize(new Dimension(190, 20));
+        button.setPreferredSize(new Dimension(190, 27));
         button.addActionListener(e -> pressedButton());
         buttonPanel.add(button, BorderLayout.CENTER);
     }
 
     // MODIFIES: this, File Directory
-    // EFFECTS: deletes GameLog json file and disposes of dialog box
+    // EFFECTS: deletes GameLog json file, clears GameLogs and disposes of dialog box
     private void pressedButton() {
         File file = new File("./data/Logs.json");
         if (file.exists()) {
             file.delete();
         }
+        Container parent = getParent();
+        EngineSwing engine = (EngineSwing) parent;
+        engine.getTop().getGameLogs().clearLogs();
         dispose();
     }
 
