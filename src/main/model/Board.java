@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 // Holds board state and is responsible for board setup and board interactions,
@@ -48,13 +47,14 @@ public class Board implements Writable {
         correctBombs();
         layout = new ArrayList<>();
         for (int i = 0; i < height; i++) {
-            List row = new ArrayList<>();
+            List<Cell> row = new ArrayList<>();
             for (int ii = 0; ii < width; ii++) {
                 row.add(new Cell());
             }
             layout.add(row);
         }
         placeBombs();
+        EventLog.getInstance().logEvent(new Event("Generate New Board Layout: " + width + " x " + height));
     }
 
     // REQUIRES: height > 0 and width > 0
@@ -66,7 +66,7 @@ public class Board implements Writable {
         unflaggedBombs = bombs;
         layout = new ArrayList<>();
         for (int i = 0; i < height; i++) {
-            List row = new ArrayList<>();
+            List<Cell> row = new ArrayList<>();
             for (int ii = 0; ii < width; ii++) {
                 row.add(new Cell());
             }

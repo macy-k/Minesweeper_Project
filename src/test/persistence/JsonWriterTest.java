@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +25,7 @@ public class JsonWriterTest {
     @Test
     public void testInit() {
         assertEquals(destination, jw.getDestination());
-        assertEquals(null, jw.getWriter());
+        assertNull(jw.getWriter());
     }
 
     @Test

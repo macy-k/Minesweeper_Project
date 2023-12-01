@@ -3,6 +3,8 @@
 package ui;
 
 import model.Cell;
+import model.Event;
+import model.EventLog;
 import model.Game;
 import model.Log;
 import persistence.JsonWriter;
@@ -22,13 +24,12 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     static final Color shadow = new Color(116, 116, 116);
     static final Color endRed = new Color(252, 4, 4);
 
-    private MineSweeper top;
+    private final MineSweeper top;
     private Game game;
-    private JsonWriter jsonWriterGame;
+    private final JsonWriter jsonWriterGame;
     private Timer timer;
 
     private Container contentPane;
-    private JPanel centeredBpHolder;
     private JScrollPane scrollPane;
     private BoardPanel bp;
     private MenuPanel mp;
@@ -57,8 +58,8 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
 
         bp = new BoardPanel(game);
         mp = new MenuPanel(this);
-        bp.setBorder(BorderFactory.createLineBorder(shadow, 3, false));
         mp.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 0, shadow));
+        bp.setBorder(BorderFactory.createLineBorder(shadow, 5, false));
 
         createScrollPane();
         contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -74,7 +75,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     // MODIFIES: this
     // EFFECTS: initiates scrollPane used for BoardPanel
     private void createScrollPane() {
-        centeredBpHolder = new JPanel();
+        JPanel centeredBpHolder = new JPanel();
         centeredBpHolder.setBackground(backgroundGrey);
         centeredBpHolder.setLayout(new GridBagLayout());
         centeredBpHolder.add(bp);
@@ -85,14 +86,11 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     // MODIFIES: this, game, BoardPanel, MenuPanel
     // EFFECTS: Begins game cycle with a certain amount of TICKS_PER_SECOND. Continues till game is over.
     private void tick() {
-        timer = new Timer(Game.TICKS_PER_SECOND, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                game.tick();
-                bp.update();
-                mp.update();
+        timer = new Timer(Game.TICKS_PER_SECOND, ae -> {
+            game.tick();
+            bp.update();
+            mp.update();
 
-            }
         });
 
         timer.start();
@@ -109,9 +107,9 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
 // Game Methods
 //####################################################################
 
-    // MODIFIES: this, game, gamelogs, BoardPanel, MenuPanel
+    // MODIFIES: this, game, gameLogs, BoardPanel, MenuPanel
     // EFFECTS: saves previous game to logs if it was started and starts a new game
-    public void newGame(Game game) throws IOException, InterruptedException {
+    public void newGame(Game game) {
         if (this.game.isStarted()) {
             top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
                     this.game.getBoard().getCorrectlyFlaggedBombs(), this.game.getTime()));
@@ -132,9 +130,9 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
         tick();
     }
 
-    // MODIFIES: this, game, gamelogs, BoardPanel, MenuPanel
+    // MODIFIES: this, game, gameLogs, BoardPanel, MenuPanel
     // EFFECTS: saves previous game to logs if it was started with a given score and starts a new game
-    public void newGame(Game game, Integer score) throws IOException, InterruptedException {
+    public void newGame(Game game, Integer score) {
         if (this.game.isStarted()) {
             top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
                     score, this.game.getTime()));
@@ -171,7 +169,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
         }
     }
 
-    // EFFECTS: gets gameLogs String from toplevel Minesweeper (which holds the game logs)
+    // EFFECTS: gets gameLogs String from top level Minesweeper (which holds the game logs)
     public String getGameLogs() {
         return top.getGameLogString();
     }
@@ -239,6 +237,9 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
                         game.isWon(),
                         game.getBoard().getCorrectlyFlaggedBombs(),
                         game.getTime()));
+            }
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.toString());
             }
         } catch (IOException | InterruptedException ex) {
             //game is already closing, do nothing

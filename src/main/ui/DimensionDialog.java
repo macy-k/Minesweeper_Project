@@ -11,8 +11,8 @@ import static ui.EngineSwing.*;
 
 // handles the dialog responsible for setting new Board dimensions
 public class DimensionDialog extends JDialog {
-    private EngineSwing engine;
-    private Container contentPane;
+    private final EngineSwing engine;
+    private final Container contentPane;
     private JPanel selectorPanel;
     private JPanel messagePanel;
 
@@ -30,7 +30,7 @@ public class DimensionDialog extends JDialog {
         contentPane.setLayout(new BorderLayout());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setSize(new Dimension(250, 200));
+        setSize(new Dimension(250, 218));
         setResizable(false);
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
@@ -100,9 +100,7 @@ public class DimensionDialog extends JDialog {
         setButton.addActionListener(e -> {
             try {
                 pressedSetOkButton();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (InterruptedException ex) {
+            } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -112,8 +110,9 @@ public class DimensionDialog extends JDialog {
     // EFFECTS: creates the label used to deliver the dialog message and the panel that holds it
     private void createMessagePanel() {
         messagePanel = new JPanel();
-        JLabel message = new JLabel("Select dimensions for a new game.");
-        message.setPreferredSize(new Dimension(220, 18));
+        JLabel message = new JLabel();
+        message.setText("<html>Select dimensions for a new game<br/>Press enter to confirm a number</html>");
+        message.setPreferredSize(new Dimension(220, 36));
         message.setFont(new Font("Dialog", Font.BOLD, 11));
         messagePanel.add(message, BorderLayout.WEST);
     }
@@ -124,14 +123,14 @@ public class DimensionDialog extends JDialog {
         int rows = (int) rowSelect.getValue();
         int col = (int) colSelect.getValue();
 
-        engine.getGame().incomplete();
+        if (!engine.getGame().isEnded()) {
+            engine.getGame().incomplete();
+        }
 
-        Board board = new Board();
-        board.setWidth(col);
-        board.setHeight(rows);
+        Board board = new Board(rows, col, 0, 0);
+        board.correctBombs();
         board.generateLayout();
         engine.newGame(new Game(board));
-
     }
 
     // private class used to create JSpinner instances with a set minimum number and size

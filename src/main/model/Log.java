@@ -5,11 +5,11 @@ import persistence.Writable;
 
 // Holds the logged data for a single game
 public class Log implements Writable {
-    private Boolean incomplete;
-    private Boolean won;
-    private Integer score;
-    private Integer time;
-    private String stateString;
+    private final Boolean incomplete;
+    private final Boolean won;
+    private final Integer score;
+    private final Integer time;
+    private final String stateString;
 
     // EFFECTS: creates a log with given game state determines human-readable string describing state
     public Log(boolean incomplete, boolean won, int score, int time) {

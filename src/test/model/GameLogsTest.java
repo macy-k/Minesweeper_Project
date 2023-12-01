@@ -1,10 +1,12 @@
 package model;
 
+import exceptions.NoSavedGameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit tests for GameLogs class
 public class GameLogsTest {
     private GameLogs gameLogs;
     private static final Log L1 = new Log(true, false, 5, 19);
@@ -179,5 +181,16 @@ public class GameLogsTest {
                 "        \"time\": 201\n" +
                 "    }\n" +
                 "]}", gameLogs.toJson().toString(4));
+    }
+
+    @Test
+    public void testNoSavedGameExcpetion() {
+        try {
+            throw new NoSavedGameException();
+        } catch (NoSavedGameException e) {
+            // pass
+        } catch (Exception e) {
+            fail();
+        }
     }
 }

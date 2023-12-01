@@ -2,11 +2,7 @@
 
 package persistence;
 
-import model.Board;
-import model.Cell;
-import model.Game;
-import model.GameLogs;
-import model.Log;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +16,7 @@ import java.util.stream.Stream;
 
 // Reads in stored objects from json files
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -38,6 +34,7 @@ public class JsonReader {
     // EFFECTS: reads Game from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Game readGame() throws IOException {
+        EventLog.getInstance().logEvent(new Event("Loads Game"));
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseGame(jsonObject);
@@ -136,10 +133,9 @@ public class JsonReader {
 
     // EFFECTS: reads a json object containing a Cell into a Cell object and returns it
     private Cell getCell(JSONObject cellJson) {
-        Cell c = new Cell(cellJson.getBoolean("isBomb"),
+        return new Cell(cellJson.getBoolean("isBomb"),
                 cellJson.getBoolean("isClear"),
                 cellJson.getBoolean("isFlagged"),
                 cellJson.getInt("inRadius"));
-        return c;
     }
 }

@@ -3,15 +3,13 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.GraphicsEnvironment;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit test for Log class
 public class LogTest {
     private Log l1;
     private Log l2;
     private Log l3;
-    private Log l4;
 
     @BeforeEach
     public void runBefore() {

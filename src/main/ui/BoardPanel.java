@@ -13,16 +13,14 @@ import static ui.EngineSwing.lightGrey;
 // class used to represent board component of gui
 public class BoardPanel extends JPanel implements Scrollable {
     static final Integer cellSideLength = 27;
-    private Game game;
+    private final Game game;
     List<List<CellLabel>> cellLabelLayout;
-
-    private GridLayout layoutManager;
 
     public BoardPanel(Game game) {
         this.game = game;
         constrainBoardSize();
         setBackground(lightGrey); // Use to look for errors
-        layoutManager = new GridLayout(game.getBoard().getHeight(), game.getBoard().getWidth());
+        GridLayout layoutManager = new GridLayout(game.getBoard().getHeight(), game.getBoard().getWidth());
         layoutManager.setHgap(0);
         layoutManager.setVgap(0);
         setLayout(layoutManager);
@@ -31,11 +29,6 @@ public class BoardPanel extends JPanel implements Scrollable {
 
     // EFFECTS: updates board graphics
     public void update() {
-        if (game.isEnded()) {
-            removeAll();
-            drawBoard();
-            revalidate();
-        }
         revalidate();
     }
 
@@ -73,9 +66,6 @@ public class BoardPanel extends JPanel implements Scrollable {
         return game;
     }
 
-    public List<List<CellLabel>> getCellLabelLayout() {
-        return cellLabelLayout;
-    }
 
 //####################################################################
 // CellLabel Management
@@ -96,7 +86,11 @@ public class BoardPanel extends JPanel implements Scrollable {
                 floodClear(row, column);
             } else {
                 if (cellLabel.getCell().getIsBomb()) {
+                    cellLabel.getCell().clear();
                     game.end();
+                    removeAll();
+                    drawBoard();
+                    revalidate();
                 } else {
                     cellLabel.clear();
                     floodClear(row, column);

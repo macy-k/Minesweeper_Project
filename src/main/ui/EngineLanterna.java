@@ -3,8 +3,6 @@ package ui;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
-import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -24,16 +22,12 @@ import java.io.IOException;
 // Operates the game GUI with Lanterna, handles user inputs and handles ticks
 public class EngineLanterna implements Engine {
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
-    private WindowBasedTextGUI gui;
-    private DefaultTerminalFactory factory;
-    private Terminal terminal;
-    private TerminalSize terminalSize;
     private Screen screen;
 
-    private MineSweeper top;
+    private final MineSweeper top;
     private Board board;
     private Game game;
-    private JsonWriter jsonWriterGame;
+    private final JsonWriter jsonWriterGame;
 
     // EFFECTS: Initiates EngineLanterna with given Game
     public EngineLanterna(MineSweeper top, Game game) {
@@ -46,21 +40,19 @@ public class EngineLanterna implements Engine {
     // EFFECTS: specifies terminal of size needed for given board and creates screen. Once game is over returns
     // a log of the game
     public void start() throws IOException, InterruptedException {
-        Integer setTerminalWidth = board.getWidth();
+        int setTerminalWidth = board.getWidth();
         if (setTerminalWidth < 14) {
             setTerminalWidth = 14;
         }
-        terminalSize = new TerminalSize(
+        TerminalSize terminalSize = new TerminalSize(
                 (setTerminalWidth),
                 ((board.getHeight()) + 3));
 
-        factory = new DefaultTerminalFactory();
+        DefaultTerminalFactory factory = new DefaultTerminalFactory();
         factory.setInitialTerminalSize(terminalSize);
-        terminal = factory.createTerminal();
+        Terminal terminal = factory.createTerminal();
         screen = new TerminalScreen(terminal);
         screen.startScreen();
-
-        gui = new MultiWindowTextGUI(screen);
 
         beginTicks();
         top.writeGameToLogs(new Log(game.isIncomplete(), game.isWon(),
@@ -116,7 +108,7 @@ public class EngineLanterna implements Engine {
 
     // MODIFIES: this
     // EFFECTS: renders the window according to game state and board data
-    private void render() throws IOException {
+    private void render() {
         if (game.isEnded()) {
             renderEndScreen();
             return;
@@ -131,7 +123,6 @@ public class EngineLanterna implements Engine {
     private void drawTimer() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
-        Integer tsize = screen.getTerminalSize().getColumns();
         text.putString(screen.getTerminalSize().getColumns() - 4, 0, game.getTimeString());
     }
 
@@ -148,7 +139,7 @@ public class EngineLanterna implements Engine {
 
     // MODIFIES: this
     // EFFECTS: draws each individual board cell on screen, aka draws board
-    private void drawBoard() throws IOException {
+    private void drawBoard() {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int ii = 0; ii < board.getWidth(); ii++) {
                 drawCell(ii, i);
@@ -225,7 +216,7 @@ public class EngineLanterna implements Engine {
     // MODIFIES: this
     // EFFECTS: draws a cell based on its state
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
-    private void drawCell(int column, int row) throws IOException {
+    private void drawCell(int column, int row) {
         Cell cell = board.getCell(row, column);
         if (cell.getIsClear()) {
             drawPosition(column, row, getPositionColor(column, row), Integer.toString(cell.getInRadius()));
@@ -237,7 +228,7 @@ public class EngineLanterna implements Engine {
     }
 
     // MODIFIES: this
-    // EFFECTS: draws a cell based on its state and what is needed to show during the lose end-game screen
+    // EFFECTS: draws a cell based on its state and what is needed to show during the loose end-game screen
     @SuppressWarnings({"checkstyle:AvoidEscapedUnicodeCharacters", "checkstyle:SuppressWarnings"}) //Need to use unicode
     private void drawLoseCell(int column, int row) {
         Cell cell = board.getCell(row, column);
@@ -333,7 +324,7 @@ public class EngineLanterna implements Engine {
 
     // MODIFIES: this
     // EFFECTS: starts a new game
-    public void newGame(Game game) throws IOException, InterruptedException {
+    public void newGame(Game game) {
         this.game = game;
         this.board = game.getBoard();
     }

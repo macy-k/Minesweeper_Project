@@ -12,23 +12,17 @@ import static ui.EngineSwing.*;
 
 // responsible for the menu panel of the gui
 public class MenuPanel extends JPanel {
-    private EngineSwing engine;
-    private Game game;
+    private final EngineSwing engine;
+    private final Game game;
 
     private JLabel timerL;
-    private ImageIcon imageTimerL;
     private JLabel scoreL;
-    private ImageIcon imageScoreL;
 
     private JLabel timerM;
-    private ImageIcon imageTimerM;
     private JLabel scoreM;
-    private ImageIcon imageScoreM;
 
     private JLabel timerR;
-    private ImageIcon imageTimerR;
     private JLabel scoreR;
-    private ImageIcon imageScoreR;
 
     private JButton viewLogs;
     private JButton loadGame;
@@ -37,7 +31,7 @@ public class MenuPanel extends JPanel {
     private JButton dimensionPopup;
 
 
-    public MenuPanel(EngineSwing engine) throws IOException, InterruptedException {
+    public MenuPanel(EngineSwing engine) {
         this.engine = engine;
         this.game = engine.getGame();
         setBackground(lightGrey);
@@ -195,9 +189,7 @@ public class MenuPanel extends JPanel {
         resetGame.addActionListener(e -> {
             try {
                 pressedResetGame();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (InterruptedException ex) {
+            } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
         });
@@ -240,8 +232,8 @@ public class MenuPanel extends JPanel {
                 game.incomplete();
             }
             Game newGame = engine.getTop().readGame();
-            newGame.start();
             engine.newGame(newGame);
+            newGame.start();
         } catch (NoSavedGameException e) {
             // for future, put in WarningDialog popup with "There is no saved game"
         }
@@ -319,7 +311,7 @@ public class MenuPanel extends JPanel {
 
     // EFFECTS: converts string into abstract list of characters
     private AbstractList<Character> toCharList(String s) {
-        return new AbstractList<Character>() {
+        return new AbstractList<>() {
             @Override
             public Character get(int index) {
                 return s.charAt(index);
@@ -333,35 +325,11 @@ public class MenuPanel extends JPanel {
     }
 
     // REQUIRES: charachter must be numerical
-    // EFFECTS: converts a charachter into its respective image sprite
+    // EFFECTS: converts a charachter into its respective image sprite and assigns it to either the timer or score
     private void charToImage(Character c, Integer imageNum, Boolean changeTimer) {
         ImageIcon image;
-        if (c == '0') {
-            image = getNumberImageFromPath("./images/0.png");
-        } else if (c == '1') {
-            image = getNumberImageFromPath("./images/1.png");
-        } else if (c == '2') {
-            image = getNumberImageFromPath("./images/2.png");
-        } else if (c == '3') {
-            image = getNumberImageFromPath("./images/3.png");
-        } else if (c == '4') {
-            image = getNumberImageFromPath("./images/4.png");
-        } else if (c == '5') {
-            image = getNumberImageFromPath("./images/5.png");
-        } else if (c == '6') {
-            image = getNumberImageFromPath("./images/6.png");
-        } else if (c == '7') {
-            image = getNumberImageFromPath("./images/7.png");
-        } else if (c == '8') {
-            image = getNumberImageFromPath("./images/8.png");
-        } else {
-            image = getNumberImageFromPath("./images/9.png");
-        }
-        chooseTimerOrScore(image, imageNum, changeTimer);
-    }
+        image = getNumberImageFromPath("./images/" + c + ".png");
 
-    // EFFECTS: changes time or score image based on given boolean
-    private void chooseTimerOrScore(ImageIcon image, Integer imageNum, Boolean changeTimer) {
         if (changeTimer) {
             assignTimerImage(image, imageNum);
         } else {
@@ -373,16 +341,13 @@ public class MenuPanel extends JPanel {
     // EFFECTS: changes timer image, whose position is given by integer imageNum
     private void assignTimerImage(ImageIcon image, Integer imageNum) {
         if (imageNum == 0) {
-            imageTimerL = image;
-            timerL.setIcon(imageTimerL);
+            timerL.setIcon(image);
             timerL.revalidate();
         } else if (imageNum == 1) {
-            imageTimerM = image;
-            timerM.setIcon(imageTimerM);
+            timerM.setIcon(image);
             timerM.revalidate();
         } else {
-            imageTimerR = image;
-            timerR.setIcon(imageTimerR);
+            timerR.setIcon(image);
             timerR.revalidate();
         }
     }
@@ -391,16 +356,13 @@ public class MenuPanel extends JPanel {
     // EFFECTS: changes score image, whose position is given by integer imageNum
     private void assignScoreImage(ImageIcon image, Integer imageNum) {
         if (imageNum == 0) {
-            imageScoreL = image;
-            scoreL.setIcon(imageScoreL);
+            scoreL.setIcon(image);
             scoreL.revalidate();
         } else if (imageNum == 1) {
-            imageScoreM = image;
-            scoreM.setIcon(imageScoreM);
+            scoreM.setIcon(image);
             scoreM.revalidate();
         } else {
-            imageScoreR = image;
-            scoreR.setIcon(imageScoreR);
+            scoreR.setIcon(image);
             scoreR.revalidate();
         }
     }

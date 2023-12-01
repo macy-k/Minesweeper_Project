@@ -2,6 +2,8 @@
 
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.Game;
 import model.GameLogs;
 import org.json.JSONObject;
@@ -13,7 +15,7 @@ import java.io.PrintWriter;
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
-    private String destination;
+    private final String destination;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -37,6 +39,7 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of Game to file
     public void write(Game g) {
+        EventLog.getInstance().logEvent(new Event("Saves Game"));
         JSONObject json = g.toJson();
         saveToFile(json.toString(TAB));
     }

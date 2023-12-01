@@ -36,6 +36,7 @@ public class GameLogs implements Writable {
     // MODIFIES: this
     // EFFECTS: removes all current logs
     public void clearLogs() {
+        EventLog.getInstance().logEvent(new Event("Reset Game Logs"));
         gameLogs = new ArrayList<>();
         won = 0;
         lost = 0;
@@ -43,6 +44,7 @@ public class GameLogs implements Writable {
 
     // EFFECTS: returns string of all game logs in human-readable form, ready for printing
     public String printGameLogs() {
+        EventLog.getInstance().logEvent(new Event("Show Game Logs"));
         if (gameLogs.isEmpty()) {
             return "No Logs\n";
         }

@@ -3,11 +3,13 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import static java.lang.Math.abs;
+
 // Holds game state and facilitates operations on board
 public class Game implements Writable {
     public static final int TICKS_PER_SECOND = 10;
 
-    private Board board;
+    private final Board board;
     private boolean ended;
     private boolean started;
     private boolean incomplete;
@@ -37,10 +39,10 @@ public class Game implements Writable {
     // MODIFIES: this
     // EFFECTS: progresses clock if game is in play. Also checks if game is won, and ends game if so.
     public void tick() {
-        if (board.getUnflaggedBombs() == 0) {
+        if (board.getUnflaggedBombs() == 0 & !ended) {
             if (board.getCorrectlyFlaggedBombs() == board.getBombs() & board.getAllUnflaggedCellsClear()) {
-                end();
                 won = true;
+                end();
             }
         }
         if (started & !ended) {
@@ -67,10 +69,16 @@ public class Game implements Writable {
 
     // EFFECTS: takes an integer and formats it into a string used in minesweeper. String never exceeds "999"
     private String toTripleString(Integer num) {
-        if (num < 10) {
-            return "00" + Integer.toString(num);
+        if (num < 0 & num >= -9) {
+            return "-0" + abs(num);
+        } else if (num < 0 & num >= -99) {
+            return "-" + abs(num);
+        } else if (num < 0) {
+            return "-99";
+        } else if (num < 10) {
+            return "00" + num;
         } else if (num < 100) {
-            return "0" + Integer.toString(num);
+            return "0" + num;
         } else if (num <= 999) {
             return Integer.toString(num);
         } else {
@@ -114,6 +122,7 @@ public class Game implements Writable {
     // EFFECTS: starts game
     public void start() {
         started = true;
+        EventLog.getInstance().logEvent(new Event("Starts Game"));
         startTimer();
     }
 
@@ -121,6 +130,11 @@ public class Game implements Writable {
     // EFFECTS: ends game
     public void end() {
         ended = true;
+        if (won) {
+            EventLog.getInstance().logEvent(new Event("Ends Game Won"));
+        } else {
+            EventLog.getInstance().logEvent(new Event("Ends Game Lost"));
+        }
     }
 
     // MODIFIES: this
@@ -128,6 +142,7 @@ public class Game implements Writable {
     public void incomplete() {
         ended = true;
         incomplete = true;
+        EventLog.getInstance().logEvent(new Event("Ends Game Incomplete"));
     }
 
     // MODIFIES: this

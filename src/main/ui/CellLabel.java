@@ -23,10 +23,10 @@ public class CellLabel extends JLabel {
     static final Color sevenText = new Color(123,0,123);
     static final Color eightText = new Color(123, 123, 123);
 
-    private Cell cell;
-    private Integer row;
-    private Integer col;
-    private BoardPanel bp;
+    private final Cell cell;
+    private final Integer row;
+    private final Integer col;
+    private final BoardPanel bp;
 
     public CellLabel(Cell cell, Integer row, Integer col, BoardPanel bp) {
         this.cell = cell;
@@ -181,17 +181,17 @@ public class CellLabel extends JLabel {
 
     // EFFECTS: retrieves the String of the cell's InRadius field for graphical use
     private String getCellText() {
-        Integer textInt = cell.getInRadius();
+        int textInt = cell.getInRadius();
         if (textInt == 0) {
             return null;
         } else {
-            return textInt.toString();
+            return Integer.toString(textInt);
         }
     }
 
     // EFFECTS: retrieves the color of text based on cells InRadius field
     private Color getTextColor() {
-        Integer c = cell.getInRadius();
+        int c = cell.getInRadius();
         if (c == 0) {
             return null;
         } else if (c == 1) {

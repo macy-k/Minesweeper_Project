@@ -12,11 +12,11 @@ import javax.swing.border.AbstractBorder;
 
 // Used to create bevel border of cells with a variable width, unlike the normal BevelBorder class
 public class CellBevelBorder extends AbstractBorder {
-    private Color topColor;
-    private Color rightColor;
-    private Color bottomColor;
-    private Color leftColor;
-    private Integer borderWidth;
+    private final Color topColor;
+    private final Color rightColor;
+    private final Color bottomColor;
+    private final Color leftColor;
+    private final Integer borderWidth;
 
     public CellBevelBorder(Color topColor, Color rightColor, Color bottomColor, Color leftColor, Integer borderWidth) {
         this.topColor = topColor;

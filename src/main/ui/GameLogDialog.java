@@ -3,14 +3,13 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.nio.file.Paths;
 
 import static ui.EngineSwing.*;
 
 // Creates and operates the dialog box that shows GameLogs
 public class GameLogDialog extends JDialog {
-    private String message;
-    private Container contentPane;
+    private final String message;
+    private final Container contentPane;
     private JScrollPane scrollPane;
     private JPanel buttonPanel;
 

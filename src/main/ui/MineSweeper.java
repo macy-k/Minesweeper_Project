@@ -3,10 +3,7 @@
 package ui;
 
 import exceptions.NoSavedGameException;
-import model.Board;
-import model.Game;
-import model.GameLogs;
-import model.Log;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -23,13 +20,13 @@ public class MineSweeper {
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
     private static final String JSON_STORE_LOG = "./data/Logs.json";
 
-    private static final Boolean engineUsesSwing = false;  // USER CHANGE THIS TO SWITCH ENGINES
+    private static final Boolean engineUsesSwing = true;  // USER CHANGE THIS TO SWITCH ENGINES
 
-    private Engine engine;
-    private GameLogs gameLogs;
-    private JsonReader jsonReaderGame;
-    private JsonWriter jsonWriterLog;
-    private JsonReader jsonReaderLog;
+    private final Engine engine;
+    private final GameLogs gameLogs;
+    private final JsonReader jsonReaderGame;
+    private final JsonWriter jsonWriterLog;
+    private final JsonReader jsonReaderLog;
 
     // EFFECTS: starts minesweeper game.
     public MineSweeper() throws IOException, InterruptedException {

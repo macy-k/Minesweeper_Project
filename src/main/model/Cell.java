@@ -39,6 +39,7 @@ public class Cell implements Writable {
     public void clear() {
         if (!isFlagged) {
             isClear = true;
+            EventLog.getInstance().logEvent(new Event("----- Clear Cell"));
         }
     }
 
@@ -47,9 +48,11 @@ public class Cell implements Writable {
     public int toggleFlag() {
         if (isFlagged) {
             isFlagged = false;
+            EventLog.getInstance().logEvent(new Event("----- Un-Flag Cell"));
             return -1;
         } else {
             isFlagged = true;
+            EventLog.getInstance().logEvent(new Event("----- Flag Cell"));
             return 1;
         }
     }
@@ -63,12 +66,6 @@ public class Cell implements Writable {
             inRadius--;
         }
     }
-
-//    // MODIFIES: this
-//    // EFFECTS: decreases amount of bombs in radius by one
-//    public void incrementInRadius(Boolean increase) {
-//        inRadius--;
-//    }
 
     public boolean getIsBomb() {
         return isBomb;

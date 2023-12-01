@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit test for Game class
 class GameTest {
     private Game g;
     private Board b;
@@ -85,6 +86,11 @@ class GameTest {
             Arrays.asList(false, false, false, false, false),
             Arrays.asList(false, false, false, false, false));
 
+// copy paste for testing:
+//        System.out.println(b.getBombsList());
+//        System.out.println(b.getInRadiusList());
+//        System.out.println(b.getClearList());
+
     @BeforeEach
     public void runBefore() {
         b = new Board();
@@ -159,6 +165,38 @@ class GameTest {
     }
 
     @Test
+    public void testGetScoreStringNegativeSingleDigits() {
+        b.setHeight(10);
+        b.setWidth(10);
+        b.generateLayout(0);
+        b.changeUnflaggedBombs(b.getCell(0, 2).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(1, 2).toggleFlag());
+        b.changeUnflaggedBombs(b.getCell(3, 2).toggleFlag());
+        g = new Game(b);
+        assertEquals("-03", g.getScoreString());
+    }
+
+    @Test
+    public void testGetScoreStringNegativeDoubleDigits() {
+        b.setHeight(10);
+        b.setWidth(10);
+        b.generateLayout(0);
+        b.changeUnflaggedBombs(36);
+        g = new Game(b);
+        assertEquals("-36", g.getScoreString());
+    }
+
+    @Test
+    public void testGetScoreStringNegativeTripleDigits() {
+        b.setHeight(10);
+        b.setWidth(10);
+        b.generateLayout(0);
+        b.changeUnflaggedBombs(178);
+        g = new Game(b);
+        assertEquals("-99", g.getScoreString());
+    }
+
+    @Test
     public void testWinTickFailNotCleared() {
         b.setHeight(3);
         b.setWidth(3);
@@ -173,8 +211,10 @@ class GameTest {
         b.getCell(2, 1).clear();
         b.getCell(2, 2).clear();
         g = new Game(b);
+
         g.tick();
         assertFalse(g.isEnded());
+        assertFalse(g.isWon());
     }
 
     @Test
@@ -194,6 +234,7 @@ class GameTest {
         g = new Game(b);
         g.tick();
         assertFalse(g.isEnded());
+        assertFalse(g.isWon());
     }
 
     @Test
@@ -213,6 +254,29 @@ class GameTest {
         g = new Game(b);
         g.tick();
         assertFalse(g.isEnded());
+        assertFalse(g.isWon());
+    }
+
+    @Test
+    public void testWinTickFailEnded() {
+        b.setHeight(3);
+        b.setWidth(3);
+        b.setRandomSeed(26);
+        b.generateLayout();
+        b.changeUnflaggedBombs(b.getCell(0, 0).toggleFlag());
+        b.getCell(0, 1).clear();
+        b.getCell(0, 2).clear();
+        b.getCell(1, 0).clear();
+        b.getCell(1, 1).clear();
+        b.getCell(1, 2).clear();
+        b.getCell(2, 0).clear();
+        b.getCell(2, 1).clear();
+        b.getCell(2, 2).clear();
+        g = new Game(b);
+        g.end();
+        g.tick();
+        assertTrue(g.isEnded());
+        assertFalse(g.isWon());
     }
 
     @Test
@@ -233,6 +297,7 @@ class GameTest {
         g = new Game(b);
         g.tick();
         assertTrue(g.isEnded());
+        assertTrue(g.isWon());
     }
 
     @Test
@@ -336,9 +401,6 @@ class GameTest {
         assertTrue(g.isStarted());
         assertTrue(g.isEnded());
         g.attemptClear(1, 2);
-//        System.out.println(b.getBombsList());
-//        System.out.println(b.getInRadiusList());
-//        System.out.println(b.getClearList());
         assertEquals(bombsListV1, b.getBombsList());
         assertEquals(clearListV6, b.getClearList());
         assertEquals(inRadiusListV1, b.getInRadiusList());
@@ -380,9 +442,6 @@ class GameTest {
         assertTrue(g.isStarted());
         assertFalse(g.isEnded());
         g.attemptClear(3, 3);
-//        System.out.println(b.getBombsList());
-//        System.out.println(b.getInRadiusList());
-//        System.out.println(b.getClearList());
         assertEquals(bombsListV4, b.getBombsList());
         assertEquals(clearListV5, b.getClearList());
         assertEquals(inRadiusListV4, b.getInRadiusList());

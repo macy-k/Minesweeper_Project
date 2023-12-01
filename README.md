@@ -40,7 +40,7 @@ _________
 
 ## User Stories
 
-Phase 1:
+### Phase 1:
 - as a user, I want to be able to choose how many cells are in my game by picking the dimensions of my game 
 (This arbitrary, since even prime numbers can be chosen by selecting [prime x 1] as a dimension)
 - as a user, I want to click my first cell, clearing it and not dying immediately
@@ -49,7 +49,7 @@ Phase 1:
 - as a user, I want to see how long I've spent on my current game
 - as a user, I want cleared cells to be color coded
 
-Phase 2:
+### Phase 2:
 - as a user, I want to be able to save my current, incomplete game (game has to be started)
 - as a user, I want to be able to load in and play my saved game from the console menu. The timer should resume automatically
 - as a user, I want the game logs to automatically persist forever and continue to update with each game (autosave)
@@ -59,7 +59,7 @@ EXTRA
 - as a user I want to see the number of games I've finished, the number of games I've won, and my win rate when I view my game logs.
 - as a user I want the game panel to show me my score and indicate whether a game is incomplete, won, or lost after the game is finished.
 
-Phase 3:
+### Phase 3:
 **Instructions for Grader**
 - You can generate the first required action related to the user story "adding multiple Xs to a Y" by changing the dimensions of the board
     with the "dimensions" selector
@@ -72,4 +72,111 @@ Phase 3:
 - You can reload the state of my application by clicking the load game button
 - Note that previous version of my game that used Lantern can still be accessed by changing the field 'engineUsesSwing'
     in the 'MineSweeper' class to false.
+
+### Phase 4:
+_task 2_: \
+Fri Dec 01 15:22:23 PST 2023    Generate New Board Layout: 30 x 16 \
+Fri Dec 01 15:22:25 PST 2023    Starts Game \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:25 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:35 PST 2023    Ends Game Incomplete \
+Fri Dec 01 15:22:35 PST 2023    Generate New Board Layout: 5 x 5 \
+Fri Dec 01 15:22:38 PST 2023    Starts Game \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:38 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:43 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:22:45 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:22:47 PST 2023    ----- Un-Flag Cell \
+Fri Dec 01 15:22:48 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:22:50 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:54 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:22:56 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:56 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:56 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:22:58 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:22:59 PST 2023    ----- Un-Flag Cell \
+Fri Dec 01 15:22:59 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:00 PST 2023    ----- Un-Flag Cell \
+Fri Dec 01 15:23:01 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:02 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:03 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:04 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:04 PST 2023    Ends Game Won \
+Fri Dec 01 15:23:11 PST 2023    Generate New Board Layout: 5 x 5 \
+Fri Dec 01 15:23:15 PST 2023    Starts Game \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:15 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:17 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:18 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:20 PST 2023    Saves Game \
+Fri Dec 01 15:23:26 PST 2023    Ends Game Incomplete \
+Fri Dec 01 15:23:26 PST 2023    Generate New Board Layout: 5 x 5 \
+Fri Dec 01 15:23:29 PST 2023    Starts Game \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:29 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:32 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:33 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:33 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:34 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:36 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:40 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:41 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:41 PST 2023    Ends Game Lost \
+Fri Dec 01 15:23:45 PST 2023    Loads Game \
+Fri Dec 01 15:23:45 PST 2023    Starts Game \
+Fri Dec 01 15:23:55 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:23:56 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:57 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:23:59 PST 2023    ----- Clear Cell \
+Fri Dec 01 15:24:02 PST 2023    Show Game Logs \
+Fri Dec 01 15:24:08 PST 2023    Reset Game Logs \
+Fri Dec 01 15:24:09 PST 2023    Show Game Logs \
+Fri Dec 01 15:24:14 PST 2023    ----- Flag Cell \
+Fri Dec 01 15:24:14 PST 2023    Ends Game Won \
+Fri Dec 01 15:24:20 PST 2023    Generate New Board Layout: 5 x 5 \
 

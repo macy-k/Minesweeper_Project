@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit tests for Cell class
 public class CellTest {
     private Cell c1;
 

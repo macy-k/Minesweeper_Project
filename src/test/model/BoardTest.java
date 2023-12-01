@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// unit tests for board class
 class BoardTest {
     private static final List<List<Boolean>> bombsListV1 = Arrays.asList(
             Arrays.asList(false, false, false),
@@ -164,7 +165,7 @@ class BoardTest {
     }
 
     @Test
-    public void testParamaterizedInit() {
+    public void testParameterizedInit() {
         b = new Board(12, 15, 36, 30);
         assertEquals(12, b.getHeight());
         assertEquals(15, b.getWidth());
