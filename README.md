@@ -180,3 +180,13 @@ Fri Dec 01 15:24:14 PST 2023    ----- Flag Cell \
 Fri Dec 01 15:24:14 PST 2023    Ends Game Won \
 Fri Dec 01 15:24:20 PST 2023    Generate New Board Layout: 5 x 5 \
 
+_task 3_: \
+I've worked on improving the design throughout the project so it's better than it used to be, but there are still
+many things I'd like to change. The biggest is that right now to access GameLogs and add to them I've used 
+coupling between my Engine classes and the top level MineSweeper, which holds the GameLogs field. Instead of this, I 
+would like to change GameLogs to a Singleton pattern, which would work much better and reduce coupling. Other than that
+there's a few nitpicks like how my old EngineLanterna class still has a field for Board when I've fixed that in every
+other class. Since Game already has access to the one and only Board used, its better to access the Board through Game. \
+Additionally, I'm not sure how well my project does on the cohesion side of things since there's a lot going on, but 
+that's a concern for later.
+
