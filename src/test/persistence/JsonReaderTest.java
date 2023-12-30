@@ -35,7 +35,7 @@ public class JsonReaderTest {
     public void testReadEmptyGameLogs() {
         try {
             jr = new JsonReader("./data/testNonExistentFile.json");
-            GameLogs gl = jr.readGameLogs();
+            jr.readGameLogs();
         } catch (IOException e) {
             return;
             // pass
@@ -78,10 +78,10 @@ public class JsonReaderTest {
     @Test
     public void testReadGeneralGameLogs() {
         jr = new JsonReader("./data/testGeneralGameLogs.json");
-        GameLogs gl;
-        gl = new GameLogs(); //so that it initializes
+        GameLogs gl = GameLogs.getInstance();
+        gl.clearLogs();
         try {
-            gl = jr.readGameLogs();
+            jr.readGameLogs();
         } catch (IOException e) {
             fail();
         }

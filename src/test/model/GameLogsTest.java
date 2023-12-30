@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // unit tests for GameLogs class
 public class GameLogsTest {
-    private GameLogs gameLogs;
+    private GameLogs gameLogs = GameLogs.getInstance();
     private static final Log L1 = new Log(true, false, 5, 19);
     private static final Log L2 = new Log(false, false, 12, 489);
     private static final Log L3 = new Log(false, true, 9, 33);
@@ -19,7 +19,7 @@ public class GameLogsTest {
 
     @BeforeEach
     public void runBefore() {
-        gameLogs = new GameLogs();
+        gameLogs.clearLogs();
     }
 
     @Test

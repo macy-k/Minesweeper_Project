@@ -1,5 +1,7 @@
 package ui;
 
+import model.GameLogs;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -67,9 +69,7 @@ public class GameLogDialog extends JDialog {
         if (file.exists()) {
             file.delete();
         }
-        Container parent = getParent();
-        EngineSwing engine = (EngineSwing) parent;
-        engine.getTop().getGameLogs().clearLogs();
+        GameLogs.getInstance().clearLogs();
         dispose();
     }
 

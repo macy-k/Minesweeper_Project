@@ -71,7 +71,8 @@ public class JsonWriterTest {
     // empty GameLogs will not be written
     @Test
     public void testWriteGeneralGameLogs() throws IOException {
-        GameLogs gl = new GameLogs();
+        GameLogs gl = GameLogs.getInstance();
+        gl.clearLogs();
         gl.addLog(new Log(true, false, 5, 19));
         gl.addLog(new Log(false, false, 12, 489));
         gl.addLog(new Log(false, true, 9, 33));
@@ -80,7 +81,7 @@ public class JsonWriterTest {
         gl.addLog(new Log(false, true, 99, 899));
         gl.addLog(new Log(false, true, 88, 201));
         jw.open();
-        jw.write(gl);
+        jw.write();
         jw.close();
 
         JSONObject jsonExpected = new JSONObject(JsonReader.readFile("./data/testGeneralGameLogs.json"));

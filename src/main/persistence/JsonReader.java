@@ -23,12 +23,12 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads GameLogs from file and returns it;
+    // EFFECTS: reads GameLogs from file and assigns it to singleton GameLogs instance;
     // throws IOException if an error occurs reading data from file
-    public GameLogs readGameLogs() throws IOException {
+    public void readGameLogs() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseGameLogs(jsonObject);
+        parseGameLogs(jsonObject);
     }
 
     // EFFECTS: reads Game from file and returns it;
@@ -60,24 +60,22 @@ public class JsonReader {
 //####################################################################
 
     // EFFECTS: reads a json object containing a GameLogs into a GameLogs object and returns it
-    private GameLogs parseGameLogs(JSONObject jsonObject) {
-        GameLogs gl = new GameLogs();
-        addLogs(gl, jsonObject);
-        return gl;
+    private void parseGameLogs(JSONObject jsonObject) {
+        addLogs(jsonObject);
     }
 
     // EFFECTS: adds a list of Log read from the json object to GameLogs
-    private void addLogs(GameLogs gl, JSONObject jsonObject) {
+    private void addLogs(JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("gameLogs");
         for (Object json : jsonArray) {
             JSONObject nextLog = (JSONObject) json;
-            addLog(gl, nextLog);
+            addLog(nextLog);
         }
     }
 
     // EFFECTS: adds a Log read from the json object to GameLogs
-    private void addLog(GameLogs gl, JSONObject jsonObject) {
-        gl.addLog(new Log(jsonObject.getBoolean("incomplete"),
+    private void addLog(JSONObject jsonObject) {
+        GameLogs.getInstance().addLog(new Log(jsonObject.getBoolean("incomplete"),
                 jsonObject.getBoolean("won"),
                 jsonObject.getInt("score"),
                 jsonObject.getInt("time")));

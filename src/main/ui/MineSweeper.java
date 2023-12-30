@@ -23,7 +23,6 @@ public class MineSweeper {
     private static final Boolean engineUsesSwing = true;  // USER CHANGE THIS TO SWITCH ENGINES
 
     private final Engine engine;
-    private final GameLogs gameLogs;
     private final JsonReader jsonReaderGame;
     private final JsonWriter jsonWriterLog;
     private final JsonReader jsonReaderLog;
@@ -33,8 +32,8 @@ public class MineSweeper {
         jsonReaderGame = new JsonReader(JSON_STORE_GAME);
         jsonWriterLog = new JsonWriter(JSON_STORE_LOG);
         jsonReaderLog = new JsonReader(JSON_STORE_LOG);
-        gameLogs = readGameLogs();
         engine = swingOrLanterna(new Game(new Board()));
+        readGameLogs();
 
         if (engineUsesSwing) {
             initiateEngineAndLogs();
@@ -65,7 +64,7 @@ public class MineSweeper {
                     System.out.print("\nThere is no saved file yet, so a file cannot be loaded.\n\n");
                 }
             } else if (Objects.equals(command, "V")) {
-                System.out.println(gameLogs.printGameLogs());
+                System.out.println(GameLogs.getInstance().printGameLogs());
             } else if (Objects.equals(command, "E")) {
                 exit(0);
             } else {
@@ -120,7 +119,7 @@ public class MineSweeper {
     public void initiateEngineAndLogs() throws IOException, InterruptedException {
         engine.start();
         jsonWriterLog.open();
-        jsonWriterLog.write(gameLogs);
+        jsonWriterLog.write();
         jsonWriterLog.close();
     }
 
@@ -157,37 +156,32 @@ public class MineSweeper {
         }
     }
 
-    // EFFECTS: returns GameLogs if there's a saved GameLogs, and otherwise returns an empty GameLogs
-    private GameLogs readGameLogs() {
+    // EFFECTS: sets GameLogs if there's a saved GameLogs, and otherwise initializes GameLogs
+    private void readGameLogs() {
         try {
-            return jsonReaderLog.readGameLogs();
+            jsonReaderLog.readGameLogs();
         } catch (IOException e) {
-            return new GameLogs();
+            GameLogs.getInstance().clearLogs();
         }
     }
 
     // MODIFIES: this
     // EFFECTS: writes a log to game logs
     public void writeGameToLogs(Log log) throws IOException, InterruptedException {
-        gameLogs.addLog(log);
+        GameLogs.getInstance().addLog(log);
         jsonWriterLog.open();
-        jsonWriterLog.write(gameLogs);
+        jsonWriterLog.write();
         jsonWriterLog.close();
     }
 
     // EFFECT: returns string equivalent of game logs
     public String getGameLogString() {
         try {
-            return gameLogs.printGameLogs();
+            return GameLogs.getInstance().printGameLogs();
         } catch (Exception e) {
             return "";
         }
     }
-
-    public GameLogs getGameLogs() {
-        return gameLogs;
-    }
-
 
     public static void main(String[] args) throws Exception  {
         new MineSweeper();

@@ -7,17 +7,28 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
-// holds all Log data for previous games and has methods operating on that data
+// holds all Log data for previous games and has methods operating on that data. Uses Singleton Pattern
 public class GameLogs implements Writable {
+    private static GameLogs theLog;
     private List<Log> gameLogs;
     private Integer won;
     private Integer lost;
 
-    // EFFECTS: initializes gameLogs with no logs and with no won or lost games
-    public GameLogs() {
+    // EFFECTS: internal construction for gameLogs with no logs and with no won or lost games
+    private GameLogs() {
         gameLogs = new ArrayList<>();
         won = 0;
         lost = 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Gets instance of EventLog and creates it if it doesn't already exist.
+    public static GameLogs getInstance() {
+        if (theLog == null) {
+            theLog = new GameLogs();
+        }
+
+        return theLog;
     }
 
     // MODIFIES: this

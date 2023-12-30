@@ -2,11 +2,8 @@
 
 package ui;
 
-import model.Cell;
+import model.*;
 import model.Event;
-import model.EventLog;
-import model.Game;
-import model.Log;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -111,7 +108,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     // EFFECTS: saves previous game to logs if it was started and starts a new game
     public void newGame(Game game) {
         if (this.game.isStarted()) {
-            top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
+            GameLogs.getInstance().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
                     this.game.getBoard().getCorrectlyFlaggedBombs(), this.game.getTime()));
         }
         timer.stop();
@@ -134,7 +131,7 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     // EFFECTS: saves previous game to logs if it was started with a given score and starts a new game
     public void newGame(Game game, Integer score) {
         if (this.game.isStarted()) {
-            top.getGameLogs().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
+            GameLogs.getInstance().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
                     score, this.game.getTime()));
         }
         timer.stop();

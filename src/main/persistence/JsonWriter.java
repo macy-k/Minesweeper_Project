@@ -31,8 +31,8 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of GameLogs to file
-    public void write(GameLogs gl) {
-        JSONObject json = gl.toJson();
+    public void write() {
+        JSONObject json = GameLogs.getInstance().toJson();
         saveToFile(json.toString(TAB));
     }
 

@@ -9,10 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.Terminal;
-import model.Board;
-import model.Cell;
-import model.Game;
-import model.Log;
+import model.*;
 import persistence.JsonWriter;
 
 
@@ -24,7 +21,6 @@ public class EngineLanterna implements Engine {
     private static final String JSON_STORE_GAME = "./data/savedGame.json";
     private Screen screen;
 
-    private final MineSweeper top;
     private Board board;
     private Game game;
     private final JsonWriter jsonWriterGame;
@@ -32,7 +28,6 @@ public class EngineLanterna implements Engine {
     // EFFECTS: Initiates EngineLanterna with given Game
     public EngineLanterna(MineSweeper top, Game game) {
         this.board = game.getBoard();
-        this.top = top;
         jsonWriterGame = new JsonWriter(JSON_STORE_GAME);
         this.game = game;
     }
@@ -55,7 +50,7 @@ public class EngineLanterna implements Engine {
         screen.startScreen();
 
         beginTicks();
-        top.writeGameToLogs(new Log(game.isIncomplete(), game.isWon(),
+        GameLogs.getInstance().addLog(new Log(game.isIncomplete(), game.isWon(),
                 board.getCorrectlyFlaggedBombs(), game.getTime()));
     }
 
