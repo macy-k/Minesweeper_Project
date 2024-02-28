@@ -1,0 +1,2923 @@
+{
+    "time": 30,
+    "board": {
+        "layout": [
+            [
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 5,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 5,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": true
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": true,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 4,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ],
+            [
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 3,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 2,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 1,
+                    "isBomb": false,
+                    "isClear": false,
+                    "isFlagged": false
+                },
+                {
+                    "inRadius": 0,
+                    "isBomb": true,
+                    "isClear": false,
+                    "isFlagged": false
+                }
+            ]
+        ],
+        "unflaggedBombs": 92,
+        "width": 30,
+        "bombs": 99,
+        "height": 16
+    }
+}

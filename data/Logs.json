@@ -1,0 +1,38 @@
+{"gameLogs": [
+    {
+        "score": 7,
+        "incomplete": true,
+        "won": false,
+        "time": 31
+    },
+    {
+        "score": 7,
+        "incomplete": true,
+        "won": false,
+        "time": 64
+    },
+    {
+        "score": 4,
+        "incomplete": true,
+        "won": false,
+        "time": 23
+    },
+    {
+        "score": 0,
+        "incomplete": false,
+        "won": false,
+        "time": 0
+    },
+    {
+        "score": 0,
+        "incomplete": true,
+        "won": false,
+        "time": 3
+    },
+    {
+        "score": 7,
+        "incomplete": true,
+        "won": false,
+        "time": 50
+    }
+]}
