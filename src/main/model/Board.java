@@ -8,7 +8,7 @@ import java.util.*;
 
 // Holds board state and is responsible for board setup and board interactions,
 public class Board implements Writable {
-    private static final double RATIO = 0.2063;
+    private static final double DENSITY_RATIO = 0.2063;
     private static final Random rand = new Random();
 
     private int height; // amount of rows
@@ -175,7 +175,7 @@ public class Board implements Writable {
     // MODIFIES: this
     // EFFECTS: ensures the value of bombs is correct for the board's height and width
     public void correctBombs() {
-        bombs = (int) (height * width * RATIO);
+        bombs = (int) (height * width * DENSITY_RATIO);
         unflaggedBombs = bombs;
     }
 
