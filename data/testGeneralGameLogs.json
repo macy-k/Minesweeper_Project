@@ -3,42 +3,49 @@
     "score": 5,
     "incomplete": true,
     "won": false,
+    "bombs": 6,
     "time": 19
   },
   {
     "score": 12,
     "incomplete": false,
     "won": false,
+    "bombs": 30,
     "time": 489
   },
   {
     "score": 9,
     "incomplete": false,
     "won": true,
+    "bombs": 9,
     "time": 33
   },
   {
     "score": 48,
     "incomplete": true,
     "won": false,
+    "bombs": 99,
     "time": 999
   },
   {
     "score": 3,
     "incomplete": false,
     "won": false,
+    "bombs": 50,
     "time": 3
   },
   {
     "score": 99,
     "incomplete": false,
     "won": true,
+    "bombs": 99,
     "time": 899
   },
   {
     "score": 88,
     "incomplete": false,
     "won": true,
+    "bombs": 88,
     "time": 201
   }
 ]}

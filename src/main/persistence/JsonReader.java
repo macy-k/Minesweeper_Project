@@ -77,6 +77,7 @@ public class JsonReader {
     private void addLog(JSONObject jsonObject) {
         GameLogs.getInstance().addLog(new Log(jsonObject.getBoolean("incomplete"),
                 jsonObject.getBoolean("won"),
+                jsonObject.getInt("bombs"),
                 jsonObject.getInt("score"),
                 jsonObject.getInt("time")));
     }

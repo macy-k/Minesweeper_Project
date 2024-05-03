@@ -3,7 +3,6 @@
 package ui;
 
 import model.*;
-import model.Event;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -109,7 +108,8 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
     public void newGame(Game game) {
         if (this.game.isStarted()) {
             GameLogs.getInstance().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
-                    this.game.getBoard().getCorrectlyFlaggedBombs(), this.game.getTime()));
+                    this.game.getBoard().getBombs(), this.game.getBoard().getCorrectlyFlaggedBombs(),
+                    this.game.getTime()));
         }
         timer.stop();
         this.game = game;
@@ -129,10 +129,10 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
 
     // MODIFIES: this, game, gameLogs, BoardPanel, MenuPanel
     // EFFECTS: saves previous game to logs if it was started with a given score and starts a new game
-    public void newGame(Game game, Integer score) {
+    public void newGame(Game game, Integer bombs, Integer score) {
         if (this.game.isStarted()) {
             GameLogs.getInstance().addLog(new Log(this.game.isIncomplete(), this.game.isWon(),
-                    score, this.game.getTime()));
+                    bombs, score, this.game.getTime()));
         }
         timer.stop();
         this.game = game;
@@ -164,11 +164,6 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
         } catch (FileNotFoundException e) {
             //for future: create WarningDialog popup with "Unable to write to file"
         }
-    }
-
-    // EFFECTS: gets gameLogs String from top level Minesweeper (which holds the game logs)
-    public String getGameLogs() {
-        return top.getGameLogString();
     }
 
     public Game getGame() {
@@ -232,12 +227,16 @@ public class EngineSwing extends JFrame implements Engine, WindowListener {
                 }
                 top.writeGameToLogs(new Log(game.isIncomplete(),
                         game.isWon(),
+                        game.getBoard().getBombs(),
                         game.getBoard().getCorrectlyFlaggedBombs(),
                         game.getTime()));
             }
-            for (Event event : EventLog.getInstance()) {
-                System.out.println(event.toString());
-            }
+
+            // Will print to console all events that occurrsed while the window was open.
+            // Used for debugging and UBC projects requirements
+//            for (Event event : EventLog.getInstance()) {
+//                System.out.println(event.toString());
+//            }
         } catch (IOException | InterruptedException ex) {
             //game is already closing, do nothing
         } finally {

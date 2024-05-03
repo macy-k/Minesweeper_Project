@@ -221,18 +221,6 @@ public class CellLabel extends JLabel {
         return cell;
     }
 
-    public Integer getRow() {
-        return row;
-    }
-
-    public Integer getCol() {
-        return col;
-    }
-
-    public BoardPanel getBoardPanel() {
-        return bp;
-    }
-
 //####################################################################
 // Mouse Listener
 //####################################################################

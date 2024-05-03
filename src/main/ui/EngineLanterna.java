@@ -50,7 +50,7 @@ public class EngineLanterna implements Engine {
         screen.startScreen();
 
         beginTicks();
-        GameLogs.getInstance().addLog(new Log(game.isIncomplete(), game.isWon(),
+        GameLogs.getInstance().addLog(new Log(game.isIncomplete(), game.isWon(), board.getBombs(),
                 board.getCorrectlyFlaggedBombs(), game.getTime()));
     }
 

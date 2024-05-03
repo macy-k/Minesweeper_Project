@@ -88,14 +88,19 @@ public class JsonReaderTest {
         assertEquals(7, gl.getGameLogs().size());
         assertEquals(3, gl.getWon());
         assertEquals(2, gl.getLost());
-        assertEquals("Games Finished:5 -- Won:3 -- Win Rate:60%\n" +
+        assertEquals("Games Played: 7\n" +
+                "Games Finished: 5\n" +
+                "Games Won: 3\n" +
+                "Completion Rate: 71%\n" +
+                "Win Rate: 60%\n" +
                 "\n" +
-                "Score:5 -- Time:19 -- Incomplete\n" +
-                "Score:12 -- Time:489 -- Lost\n" +
-                "Score:9 -- Time:33 -- Won\n" +
-                "Score:48 -- Time:999 -- Incomplete\n" +
-                "Score:3 -- Time:3 -- Lost\n" +
-                "Score:99 -- Time:899 -- Won\n" +
-                "Score:88 -- Time:201 -- Won\n", gl.printGameLogs());
+                "Bombs\tScore\tTime\tGame State\n" +
+                "B: 6\tS: 5\tT: 19\tIncomplete\n" +
+                "B: 30\tS: 12\tT: 489\tLost\n" +
+                "B: 9\tS: 9\tT: 33\tWon\n" +
+                "B: 99\tS: 48\tT: 999\tIncomplete\n" +
+                "B: 50\tS: 3\tT: 3\tLost\n" +
+                "B: 99\tS: 99\tT: 899\tWon\n" +
+                "B: 88\tS: 88\tT: 201\tWon", gl.printGameLogs());
     }
 }

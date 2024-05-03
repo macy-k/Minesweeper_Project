@@ -73,13 +73,13 @@ public class JsonWriterTest {
     public void testWriteGeneralGameLogs() throws IOException {
         GameLogs gl = GameLogs.getInstance();
         gl.clearLogs();
-        gl.addLog(new Log(true, false, 5, 19));
-        gl.addLog(new Log(false, false, 12, 489));
-        gl.addLog(new Log(false, true, 9, 33));
-        gl.addLog(new Log(true, false, 48, 999));
-        gl.addLog(new Log(false, false, 3, 3));
-        gl.addLog(new Log(false, true, 99, 899));
-        gl.addLog(new Log(false, true, 88, 201));
+        gl.addLog(new Log(true, false, 6, 5, 19));
+        gl.addLog(new Log(false, false, 30, 12, 489));
+        gl.addLog(new Log(false, true, 9, 9, 33));
+        gl.addLog(new Log(true, false, 99,48, 999));
+        gl.addLog(new Log(false, false, 50, 3, 3));
+        gl.addLog(new Log(false, true, 99, 99, 899));
+        gl.addLog(new Log(false, true, 88, 88, 201));
         jw.open();
         jw.write();
         jw.close();

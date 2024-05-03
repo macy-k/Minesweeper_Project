@@ -219,8 +219,7 @@ public class MenuPanel extends JPanel {
 
     // EFFECTS: calls up dialog popup used to view game logs
     private void pressedViewLogs() {
-        String gameLogs = engine.getGameLogs();
-        new GameLogDialog(engine, "Game Logs", gameLogs);
+        new GameLogDialog(engine, "Game Logs");
     }
 
     // MODIFIES: game, engine
@@ -248,8 +247,9 @@ public class MenuPanel extends JPanel {
                 game.incomplete();
             }
             Integer score = game.getBoard().getCorrectlyFlaggedBombs();
+            Integer bombs = game.getBoard().getBombs();
             game.getBoard().generateLayout();
-            engine.newGame(new Game(game.getBoard()), score);
+            engine.newGame(new Game(game.getBoard()), bombs, score);
         }
     }
 

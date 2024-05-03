@@ -11,7 +11,7 @@ want to interact with the HTML element of the game online, so this is a good opp
 
 Currently Implemented:
 - Models the data structure of a Cell, Board, Game, Log, and GameLog within their own respective classes
-- Board class can automatically generate a randomized layout for an arbitrary number of bombs with any specified density
+- Board class can automatically generate a randomized layout for an arbitrary number of bombs with any density
 - Dimensions of the Board used in a Game can be changed while the Game hasn't been started
 - GameLog and EventLog use a Singleton design pattern to reduce coupling
 - GameLog records all previously played games, tracks win ratio and percentage, and can be reset completely
@@ -21,16 +21,16 @@ Currently Implemented:
 - Uses manipulation of various Swing layouts including GridBagLayout, GridLayout, SpringLayout etc. to properly organize GUI
 - Visuals make use of custom pixel art and a custom extension of AbstractBorder to stay true to the original design
 - Implements a scrollable playing area using JScrollPane and implementations of the Scrollable interface
-- CellLabels each contain a mouse handler that communicates the player's mouse position to the Game. Also allows the clearing of cells via left-click by starting the clearing system originating in BoardPanel
+- CellLabels each contain a mouse handler that communicates the player's mouse position to the Game. Also allows the clearing of cells via left-click by starting the clearing system in BoardPanel
 - BoardPanel contains mutually recursive methods for clearing cells on the board, ensuring that all nearby 0 cells are flood-cleared. This system interacts with both the CellLabel graphics and the corresponding Cell data-structures
 - Contains two Engines: the currently used EngineSwing which includes the described Swing GUI and the EngineLanterna which was used early in development for visualization via a text-based GUI
 - EngineSwing contains a key handler which allows player interactions with Cells via the space bar to flag, unflag, or clear surrounding Cells based on the selected Cell's state
 - Includes user-friendly options for changing the dimensions of the board, saving the board, loading a previously saved board, viewing game logs, and resetting the board
 - Includes full testing of model and persistence packages with 100% code coverage
+- The View GameLogs dialog has a well organized text-structure for readability and has a toggled option to filter out Incomplete games from the Logs for viewing
 
-To Be Implemented:
-- More visually appealing Dialog UI for viewing Gamelogs and changing the dimensions
+- To Be Implemented:
+- More visually appealing Dialog UI changing the dimensions
 - Create an auto-solver using a combination of pattern recognition and statistical analysis (switching when needed--uses statistics when no more completely safe patterns are recognized)
 - Create a downloadable application for the project
-- Possible implement customizable color themes
-- Make it possible to filter Games viewed in the GameLog by size of the board, completion statue, and other filtration methods.
+- Possibly implement customizable color themes

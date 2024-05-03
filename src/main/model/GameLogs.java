@@ -13,12 +13,14 @@ public class GameLogs implements Writable {
     private List<Log> gameLogs;
     private Integer won;
     private Integer lost;
+    private Integer incomplete;
 
     // EFFECTS: internal construction for gameLogs with no logs and with no won or lost games
     private GameLogs() {
         gameLogs = new ArrayList<>();
         won = 0;
         lost = 0;
+        incomplete = 0;
     }
 
     // MODIFIES: this
@@ -41,6 +43,8 @@ public class GameLogs implements Writable {
             } else {
                 lost++;
             }
+        } else {
+            incomplete++;
         }
     }
 
@@ -51,6 +55,7 @@ public class GameLogs implements Writable {
         gameLogs = new ArrayList<>();
         won = 0;
         lost = 0;
+        incomplete = 0;
     }
 
     // EFFECTS: returns string of all game logs in human-readable form, ready for printing
@@ -60,10 +65,42 @@ public class GameLogs implements Writable {
             return "No Logs\n";
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Games Finished:" + (getLost() + getWon()) + " -- Won:" + getWon()
-                +  " -- Win Rate:" + getWinRate() + "%\n\n");
+        sb.append("Games Played: " + (getLost() + getWon() + getIncomplete())
+                + "\nGames Finished: " + (getLost() + getWon()) + "\nGames Won: " + getWon()
+                + "\nCompletion Rate: " + getCompletionRate() + "%"
+                + "\nWin Rate: " + getWinRate() + "%\n\n");
+        sb.append("Bombs\tScore\tTime\tGame State");
         for (Log log : gameLogs) {
-            sb.append("Score:" + log.getScore() + " -- Time:" + log.getTime() + " -- " + log.getStateString() + "\n");
+            sb.append("\nB: " + log.getBombs() + "\tS: " + log.getScore() + "\tT: " + log.getTime()
+                    + "\t" + log.getStateString() + "");
+
+        }
+        return sb.toString();
+    }
+
+    // EFFECTS: returns string of filtered game logs in human-readable form, ready for printing
+    public String printGameLogs(Boolean filter) {
+        EventLog.getInstance().logEvent(new Event("Show Game Logs"));
+        if (gameLogs.isEmpty()) {
+            return "No Logs\n";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Games Played: " + (getLost() + getWon() + getIncomplete())
+                + "\nGames Finished: " + (getLost() + getWon()) + "\nGames Won: " + getWon()
+                + "\nCompletion Rate: " + getCompletionRate() + "%"
+                + "\nWin Rate: " + getWinRate() + "%\n\n");
+        sb.append("Bombs\tScore\tTime\tGame State");
+        for (Log log : gameLogs) {
+            if (filter) {
+                if (!log.getIncomplete()) {
+                    sb.append("\nB: " + log.getBombs() + "\tS: " + log.getScore() + "\tT: " + log.getTime()
+                            + "\t" + log.getStateString() + "");
+                }
+            } else {
+                sb.append("\nB: " + log.getBombs() + "\tS: " + log.getScore() + "\tT: " + log.getTime()
+                        + "\t" + log.getStateString() + "");
+            }
+
         }
         return sb.toString();
     }
@@ -72,6 +109,14 @@ public class GameLogs implements Writable {
     public Integer getWinRate() {
         if ((lost + won) != 0) {
             return (won * 100 / (lost + won));
+        } else {
+            return 0;
+        }
+    }
+
+    public Integer getCompletionRate() {
+        if ((won + lost + incomplete) != 0) {
+            return ((won + lost) * 100 / (won + lost + incomplete));
         } else {
             return 0;
         }
@@ -87,6 +132,10 @@ public class GameLogs implements Writable {
 
     public Integer getLost() {
         return lost;
+    }
+
+    public Integer getIncomplete() {
+        return incomplete;
     }
 
 //####################################################################

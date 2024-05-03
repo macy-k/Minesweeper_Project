@@ -10,14 +10,16 @@ import static ui.EngineSwing.*;
 
 // Creates and operates the dialog box that shows GameLogs
 public class GameLogDialog extends JDialog {
-    private final String message;
     private final Container contentPane;
     private JScrollPane scrollPane;
+    private TextPanel textPanel;
     private JPanel buttonPanel;
+    private JButton buttonFilter;
+    private Boolean filter;
 
-    public GameLogDialog(EngineSwing owner, String title, String message) {
+    public GameLogDialog(EngineSwing owner, String title) {
         super(owner, title);
-        this.message = message;
+        this.filter = false;
         contentPane = getContentPane();
         start();
     }
@@ -25,8 +27,8 @@ public class GameLogDialog extends JDialog {
     // EFFECTS: Starts Dialog box
     public void start() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 450);
-        setMinimumSize(new Dimension(320, 100));
+        setSize(440, 450);
+        setMinimumSize(new Dimension(320, 200));
         contentPane.setBackground(lightGrey);
 
         createScrollPane();
@@ -41,7 +43,8 @@ public class GameLogDialog extends JDialog {
     // MODIFIES: this
     // EFFECTS: creates scroll pane
     private void createScrollPane() {
-        scrollPane = new JScrollPane(new TextPanel());
+        textPanel = new TextPanel();
+        scrollPane = new JScrollPane(textPanel);
         scrollPane.setBackground(Color.WHITE);
         scrollPane.setOpaque(false);
         scrollPane.setBorder(BorderFactory.createLineBorder(lightGrey, 0, false));
@@ -52,19 +55,27 @@ public class GameLogDialog extends JDialog {
     // MODIFIES: this
     // EFFECTS: creates button panel
     private void createButtonPanel() {
+        JButton buttonReset = new JButton("Reset Logs");
+        buttonReset.setBackground(lightGrey);
+        buttonReset.setBorder(new CellBevelBorder(highlight, shadow, shadow, highlight, 3));
+        buttonReset.setFocusable(false);
+        buttonReset.setPreferredSize(new Dimension(120, 27));
+        buttonReset.addActionListener(e -> pressedButtonReset());
+        buttonFilter = new JButton("Filter Incomplete Logs");
+        buttonFilter.setBackground(lightGrey);
+        buttonFilter.setBorder(new CellBevelBorder(highlight, shadow, shadow, highlight, 3));
+        buttonFilter.setFocusable(false);
+        buttonFilter.setPreferredSize(new Dimension(170, 27));
+        buttonFilter.addActionListener(e -> pressedButtonFilter());
+
         buttonPanel = new JPanel();
-        JButton button = new JButton("Press to Reset Game Logs");
-        button.setBackground(lightGrey);
-        button.setBorder(new CellBevelBorder(highlight, shadow, shadow, highlight, 3));
-        button.setFocusable(false);
-        button.setPreferredSize(new Dimension(190, 27));
-        button.addActionListener(e -> pressedButton());
-        buttonPanel.add(button, BorderLayout.CENTER);
+        buttonPanel.add(buttonReset, BorderLayout.EAST);
+        buttonPanel.add(buttonFilter, BorderLayout.WEST);
     }
 
     // MODIFIES: this, File Directory
     // EFFECTS: deletes GameLog json file, clears GameLogs and disposes of dialog box
-    private void pressedButton() {
+    private void pressedButtonReset() {
         File file = new File("./data/Logs.json");
         if (file.exists()) {
             file.delete();
@@ -73,21 +84,36 @@ public class GameLogDialog extends JDialog {
         dispose();
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the message displayed by the dialog box to either filter or unfilter incomplete games
+    private void pressedButtonFilter() {
+        filter = !filter;
+        if (filter) {
+            buttonFilter.setText("Unfilter Incomplete Logs");
+        } else {
+            buttonFilter.setText("Filter Incomplete Logs");
+        }
+        textPanel.changeTextAreaFilter();
+    }
+
     //Private class used to create scrollable text panel
     private class TextPanel extends JPanel implements Scrollable {
+        private final JTextArea text;
 
         public TextPanel() {
-            add(createTextBox());
-        }
-
-        // EFFECTS: creates text area/box with game logs
-        public JTextArea createTextBox() {
-            JTextArea text = new JTextArea();
+            text = new JTextArea();
             text.setBackground(Color.WHITE);
             text.setOpaque(false);
-            text.setText(message);
+            text.setEditable(false);
+            text.setText(GameLogs.getInstance().printGameLogs());
             text.setFont(new Font("Dialog", Font.BOLD, 15));
-            return text;
+            add(text);
+        }
+
+        // MODIFIES: this
+        // EFFECTS: changes the text in the text area according to the filter
+        public void changeTextAreaFilter() {
+            text.setText(GameLogs.getInstance().printGameLogs(filter));
         }
 
         @Override

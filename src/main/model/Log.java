@@ -9,12 +9,14 @@ public class Log implements Writable {
     private final Boolean won;
     private final Integer score;
     private final Integer time;
+    private final Integer bombs;
     private final String stateString;
 
     // EFFECTS: creates a log with given game state determines human-readable string describing state
-    public Log(boolean incomplete, boolean won, int score, int time) {
+    public Log(boolean incomplete, boolean won, int bombs, int score, int time) {
         this.incomplete = incomplete;
         this.won = won;
+        this.bombs = bombs;
         this.score = score;
         this.time = time;
         if (incomplete) {
@@ -32,6 +34,10 @@ public class Log implements Writable {
 
     public boolean getWon() {
         return won;
+    }
+
+    public Integer getBombs() {
+        return bombs;
     }
 
     public Integer getScore() {
@@ -56,6 +62,7 @@ public class Log implements Writable {
         JSONObject json = new JSONObject();
         json.put("incomplete", incomplete);
         json.put("won", won);
+        json.put("bombs", bombs);
         json.put("score", score);
         json.put("time", time);
         return json;
