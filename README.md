@@ -29,7 +29,7 @@ Currently Implemented:
 - Includes full testing of model and persistence packages with 100% code coverage
 - The View GameLogs dialog has a well organized text-structure for readability and has a toggled option to filter out Incomplete games from the Logs for viewing
 
-- To Be Implemented:
+To Be Implemented:
 - More visually appealing Dialog UI changing the dimensions
 - Create an auto-solver using a combination of pattern recognition and statistical analysis (switching when needed--uses statistics when no more completely safe patterns are recognized)
 - Create a downloadable application for the project
